@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 import { getAllCategories } from "../../lib/cosmic";
 
-const TagsRow =  async() => {
+const TagsRow =  async function(){
     const tags = await getAllCategories();
     
     console.log(tags);
