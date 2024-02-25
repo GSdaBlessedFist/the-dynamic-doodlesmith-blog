@@ -1,15 +1,19 @@
+
 import Link from "next/link";
 import styles from "./styles.module.scss";
 
-const TagsRow = () => {
+import { getAllCategories } from "../../lib/cosmic";
 
-    const tags = ["React","Medusa.js","SVG"];
+const TagsRow =  async() => {
+    const tags = await getAllCategories();
+    
+    console.log(tags);
     return (
         <div className={styles.tagsRow}>
             {tags.map((tag,i) =>(
-                <div key={`tag-${tag}`}>
+                <div key={tag.slug || i}>
                     <button className={styles.button}>
-                    <Link href={"/"}>{tag}</Link>
+                    <Link href={"/"} className="truncate">{tag.title.toUpperCase()}</Link>
                     </button>
                 </div>
             ))}
