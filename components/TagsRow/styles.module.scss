@@ -1,0 +1,8 @@
+
+
+.tagsRow{
+    @apply  max-w-5xl w-full mx-auto sticky top-10 bg-primary flex justify-evenly p-2;
+}
+.button{
+    @apply text-xl text-primaryMuted border-2 border-primaryMuted rounded-3xl py-0 px-3;
+}

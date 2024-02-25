@@ -1,0 +1,27 @@
+//svg width="850" height="255"
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 30%;
+  padding: 0 25px;
+  perspective: 180px;
+}
+.dynamicDoodlesmithLogoSVG {
+  transform-origin: left;
+  transform: rotateY(15deg);
+}
+.bigDLetter{
+  fill: white;
+}
+.dynamicLetter{
+  fill: white;
+  opacity: 1;
+}
+.doodlesmithLetter{
+  fill: white;
+}
+.bracket {
+  fill: white;
+}

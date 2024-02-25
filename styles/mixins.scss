@@ -1,0 +1,5 @@
+
+
+@mixin b($w:2px,$c:red,$style:dashed){
+    border: $w $c $style;
+}

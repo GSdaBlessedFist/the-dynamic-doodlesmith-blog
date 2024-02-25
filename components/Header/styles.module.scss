@@ -1,0 +1,23 @@
+@import "../../styles/mixins.scss";
+
+.header{
+    @apply max-w-5xl flex flex-col justify-between sticky top-0 z-10 mx-auto bg-primaryDark backdrop-blur-2xl;
+}
+
+.logo{
+    @apply flex space-x-2 lg:ml-4;
+    @at-root{
+        .logoLink{
+            @apply w-48 bg-gradient-to-r from-cyan-700 to-teal-600 bg-clip-text text-4xl font-bold tracking-tighter text-transparent dark:from-cyan-300 dark:to-teal-200;
+        }
+    }
+}
+
+.buttonGroup{
+    @apply flex flex-col lg:flex-row justify-evenly items-end mr-4 lg:items-center w-48 ;
+    @at-root{
+        .button{
+            @apply border-primary border-2 text-white lg:p-2;
+        }
+    }
+}
