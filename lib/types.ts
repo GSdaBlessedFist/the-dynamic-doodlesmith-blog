@@ -28,6 +28,7 @@ export interface Post {
     categories: {
       title: string;
     }[];
+    theme:Theme
   };
 }
 
@@ -45,4 +46,13 @@ export interface Author {
 export interface Category {
   slug: string;
   title: string;
+}
+
+interface Theme{
+  metadata: {
+    primary: string;
+    primary_muted: string;
+    primary_dark: string;
+    secondary: string;  
+  }
 }

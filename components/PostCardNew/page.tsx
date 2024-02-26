@@ -87,7 +87,7 @@ const Title = ({ post, alignment }: { post: Post; alignment: string }) => {
 const DrawnAvatar = ({ drawnAvatarAlignment }: { drawnAvatarAlignment: string }) => {
   return (
     <div className={`${styles.drawnAvatar} ${drawnAvatarAlignment}`}>
-
+        {/* <Image src={"/images/hmm.png"} width={200} height={250} alt={"thinking about it"} /> */}
     </div>
   );
 }

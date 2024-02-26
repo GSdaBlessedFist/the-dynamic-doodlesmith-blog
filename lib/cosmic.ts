@@ -1,5 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk';
-import { Post,GlobalData,Author,Category } from './types';
+import { Post,GlobalData,Author,Category,Theme } from './types';
 
 const cosmic = createBucketClient({
   // @ts-ignore
@@ -162,4 +162,23 @@ export async function getAllCategories():Promise<Category[]> {
     console.log('Oof', error);
   }
   return Promise.resolve([] );
+}
+
+export async function getPostTheme():Promise<Theme | null>{
+  try {
+    const data: any = await Promise.resolve(
+      cosmic.objects
+        .find({type: "theme-colors"})
+        .props(['metadata'])
+    );
+    if (data && data.objects && data.objects.metadata) {
+      return data.objects;
+    } else {
+      console.log('Data does not have the expected structure');
+      return null;
+    }
+  } catch (error) {
+    console.log('Oof', error);
+    return null;
+  }
 }

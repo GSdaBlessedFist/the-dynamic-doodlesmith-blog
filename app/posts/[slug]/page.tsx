@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ArrowLeft from '../../../components/icons/ArrowLeft';
@@ -24,6 +24,12 @@ export async function generateMetadata({
 export default async ({ params }: { params: { slug: string } }) => {
   const post = await getPost({ params });
   const suggestedPosts = await getRelatedPosts({ params });
+
+  console.log(`theme colors: ${JSON.stringify(post.metadata.theme.metadata)}`)
+const {primary,primary_dark,primary_muted,secondary} = post.metadata.theme.metadata;
+
+  
+  
 
   return (
     <>
