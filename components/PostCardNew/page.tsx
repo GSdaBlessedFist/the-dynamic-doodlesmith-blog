@@ -4,21 +4,21 @@ import Image from 'next/image';
 import ArrowRight from '../icons/ArrowRight';
 import Tag from '../Tag';
 import { Post } from '../../lib/types';
-import AuthorAttribution from '../AuthorAttribution';
-import AuthorAvatar from '../AuthorAvatar';
+import AuthorAttribution from '../AuthorAttribution/page';
+import AuthorAvatar from '../AuthorAvatar/page';
 import { sanitize } from 'isomorphic-dompurify';
 import styles from "./styles.module.scss";
 
-export default function PostCardNew({ post,alignment  }: { post: Post; alignment?:string }) {
+export default function PostCardNew({ post, alignment }: { post: Post; alignment?: string }) {
   const alignmentClass = alignment === "left" ? styles.alignLeft : styles.alignRight;
-
+  const drawnAvatarClass = alignment === "left" ? styles.drawnAvatarRight : styles.drawnAvatarLeft;
   return (
 
     <div className={styles.postCard}>
       <div className={styles.heroSection}>
         {post.metadata.hero?.imgix_url && (
           <Link href={`/posts/${post.slug}`}>
-            <Image
+            {/* <Image
               width={2800}
               height={400}
               className="mb-0 h-48 w-full rounded-xl bg-no-repeat object-cover object-center transition-transform duration-200 ease-out hover:scale-[1.02]"
@@ -27,8 +27,8 @@ export default function PostCardNew({ post,alignment  }: { post: Post; alignment
               alt={post.title}
               placeholder="blur"
               blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
-            />
-            <Title post={post} alignment={alignmentClass}/>
+            /> */}
+            <Title post={post} alignment={alignmentClass} />
           </Link>
         )}
       </div>
@@ -41,19 +41,19 @@ export default function PostCardNew({ post,alignment  }: { post: Post; alignment
             <AuthorAttribution post={post} />
           </div>
           <div className="flex select-none justify-start space-x-2 md:hidden md:justify-end">
-            {post.metadata.categories &&
-              post.metadata.categories.map((category) => (
-                <Tag key={category.title}>{category.title}</Tag>
-              ))}
+            {post.metadata.categories && post.metadata.categories.map((category) => (
+              <Tag key={category.title}>{category.title}</Tag>
+            ))}
           </div>
         </div>
-        <div
-          className="py-6 text-zinc-500 dark:text-zinc-300"
-          dangerouslySetInnerHTML={{
+        <div className="border-4 border-blue-300 overflow-hidden">
+          <div className={styles.teaser} dangerouslySetInnerHTML={{
             __html: sanitize(post.metadata.teaser) ?? '',
-          }}
-        />
-        <div className="flex items-center justify-between font-medium text-green-600 dark:text-green-200">
+          }} />
+
+        </div>
+
+        <div className="border-8 flex items-center justify-between font-medium text-green-600 dark:text-green-200">
           <Link href={`/posts/${post.slug}`}>
             <div className="flex items-center space-x-2">
               <span>Read more</span>
@@ -67,19 +67,25 @@ export default function PostCardNew({ post,alignment  }: { post: Post; alignment
               ))}
           </div>
         </div>
-
+        <DrawnAvatar drawnAvatarAlignment={drawnAvatarClass} />
       </div>
 
     </div>
   );
 }
 
-const Title = ({ post ,alignment}: { post: Post; alignment: string }) => {
-  
-  
+const Title = ({ post, alignment }: { post: Post; alignment: string }) => {
   return (
     <div className={`${styles.title} ${alignment}`}>
       {post.title}
+    </div>
+  );
+}
+
+const DrawnAvatar = ({ drawnAvatarAlignment }: { drawnAvatarAlignment: string }) => {
+  return (
+    <div className={`${styles.drawnAvatar} ${drawnAvatarAlignment}`}>
+
     </div>
   );
 }

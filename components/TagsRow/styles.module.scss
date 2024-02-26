@@ -1,8 +1,8 @@
 
 
 .tagsRow{
-    @apply  max-w-5xl w-full mx-auto sticky top-10 bg-primary flex flex-wrap justify-start p-2;
+    @apply  max-w-5xl w-full mx-auto sticky top-10 bg-primary flex flex-wrap justify-start p-2 border-b-8 border-gray;
 }
 .button{
-    @apply flex justify-center items-center text-sm text-secondary border-2 border-primaryMuted rounded-3xl m-1 py-1 px-3;
+    @apply flex justify-center items-center text-sm text-gray font-semibold border-2 border-primaryMuted rounded-3xl m-1 py-1 pt-2 px-3;
 }

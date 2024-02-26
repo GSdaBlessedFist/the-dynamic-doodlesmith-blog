@@ -1,5 +1,5 @@
-import { Post } from '../lib/types';
-import helpers from '../helpers';
+import { Post } from '../../lib/types';
+import helpers from '../../helpers';
 
 export default function AuthorAttribution({
   post,

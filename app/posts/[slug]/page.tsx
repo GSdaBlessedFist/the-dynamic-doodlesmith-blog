@@ -6,8 +6,8 @@ import { getPost } from '../../../lib/cosmic';
 import { getRelatedPosts } from '../../../lib/cosmic';
 import SuggestedPostCard from '../../../components/SuggestedPostCard';
 import Tag from '../../../components/Tag';
-import AuthorAvatar from '../../../components/AuthorAvatar';
-import AuthorAttribution from '../../../components/AuthorAttribution';
+import AuthorAvatar from '../../../components/AuthorAvatar/page';
+import AuthorAttribution from '../../../components/AuthorAttribution/page';
 import { sanitize } from 'isomorphic-dompurify';
 
 export async function generateMetadata({

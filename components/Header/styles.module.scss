@@ -5,7 +5,7 @@
 }
 
 .logo{
-    @apply flex space-x-2 lg:ml-4;
+    @apply flex space-x-2 ml-8 lg:ml-4;
     @at-root{
         .logoLink{
             @apply w-48 bg-gradient-to-r from-cyan-700 to-teal-600 bg-clip-text text-4xl font-bold tracking-tighter text-transparent dark:from-cyan-300 dark:to-teal-200;
@@ -14,7 +14,7 @@
 }
 
 .buttonGroup{
-    @apply flex flex-col lg:flex-row justify-evenly items-end mr-4 lg:items-center w-48 ;
+    @apply flex flex-col lg:flex-row justify-evenly items-end mr-8 lg:mr-4 lg:items-center w-48 ;
     @at-root{
         .button{
             @apply border-primary border-2 text-white lg:p-2;

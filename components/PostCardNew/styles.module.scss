@@ -2,13 +2,15 @@
 
 
 .postCard{
-    @apply relative  bg-grayDark  overflow-hidden my-4;
-    @include b(3px,white,solid);
+    @apply relative h-72 bg-grayDark my-8;
+    //@include b(3px,white,solid);
 }
 .heroSection{
+    @apply relative h-40 bg-primary;
 }
 .title{
-    @apply absolute top-6 w-2/3 text-5xl text-white font-bold z-20;
+    @apply absolute top-1/2 w-3/4 text-5xl text-secondary font-bold ;
+    transform: translateY(-50%);
 }
 .alignLeft{
     @extends .title;
@@ -16,17 +18,31 @@
 }
 .alignRight{
     @extends .title;
-    @apply right-0 lg:right-8 text-right;
+    @apply right-0 md:right-8 text-right;
 }
 .infoSection{
     @apply h-24;
 }
 .authorSection{
-    @apply relative m-0 flex flex-col justify-between space-y-4 md:flex-row md:space-y-0 ;
-    @include b;
+    @apply relative m-0 flex flex-col justify-between space-y-4 md:flex-row md:space-y-0 py-2 px-4;
+    // @include b;
     @at-root{
         .authorInfo{
             @apply flex items-center space-x-2 text-zinc-500 dark:text-zinc-400 md:space-y-0;
         }
     }
+}
+.drawnAvatar{
+    @apply absolute top-16  bg-primaryDark w-40 h-40 rounded-full border-8 border-primary;
+}
+.drawnAvatarRight{
+    @extends .drawnAvatar;
+    @apply -right-4;
+}
+.drawnAvatarLeft{
+    @extends .drawnAvatar;
+    @apply -left-4;
+}
+.teaser{
+    @apply text-zinc-500 dark:text-zinc-300 truncate py-0 px-4 overflow-hidden;
 }

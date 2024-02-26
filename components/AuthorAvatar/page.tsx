@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Post } from '../lib/types';
+import { Post } from '../../lib/types';
+import styles from "./styles.module.scss";
 
 export default function AuthorAvatar({ post }: { post: Post }): JSX.Element {
   return (
     <Link href={`/author/${post.metadata.author?.slug}`}>
       <Image
-        className="h-8 w-8 rounded-full"
+        className={styles.avatarImage}
         src={`${post.metadata.author?.metadata.image?.imgix_url}?w=100&auto=format`}
-        width={32}
-        height={32}
+        width={48}
+        height={48}
         alt={post.title}
       ></Image>
     </Link>

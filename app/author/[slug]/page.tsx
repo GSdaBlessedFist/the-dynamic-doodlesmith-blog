@@ -1,6 +1,7 @@
 import React from 'react';
 import PostCard from '../../../components/PostCard';
 import { getAuthor, getAuthorPosts } from '../../../lib/cosmic';
+import PostCardNew from '../../../components/PostCardNew/page';
 
 export async function generateMetadata({
   params,
@@ -18,7 +19,7 @@ export default async ({ params }: { params: { id: string; slug: string } }) => {
   const posts = await getAuthorPosts({ authorId: author.id });
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-col px-4 lg:px-0">
+    <main className="mx-auto w-full max-w-4xl flex-col px-4 lg:px-0">
       <h1 className="my-4 text-4xl font-bold leading-tight tracking-tight text-zinc-700 dark:text-zinc-300">
         Posts by {author.title}
       </h1>
@@ -28,7 +29,7 @@ export default async ({ params }: { params: { id: string; slug: string } }) => {
           posts.map((post) => {
             return (
               <div key={post.id}>
-                <PostCard post={post} />
+                <PostCardNew post={post} />
               </div>
             );
           })}

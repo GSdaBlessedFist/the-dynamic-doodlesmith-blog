@@ -4,8 +4,8 @@ import Image from 'next/image';
 import ArrowRight from './icons/ArrowRight';
 import Tag from './Tag';
 import { Post } from '../lib/types';
-import AuthorAttribution from './AuthorAttribution';
-import AuthorAvatar from './AuthorAvatar';
+import AuthorAttribution from './AuthorAttribution/page';
+import AuthorAvatar from './AuthorAvatar/page';
 import { sanitize } from 'isomorphic-dompurify';
 
 export default function PostCard({ post }: { post: Post }) {
