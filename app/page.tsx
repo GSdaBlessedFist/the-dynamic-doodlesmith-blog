@@ -11,7 +11,8 @@ export default async function Page(): Promise<JSX.Element> {
 
 
   return (<>
-    <main className=" mx-auto mt-2 max-w-4xl flex-col space-y-16 px-4 lg:px-0 overflow-hidden">
+    
+    <main className="	 mx-auto mt-2 max-w-5xl flex-col space-y-16 px-4 lg:px-0 overflow-hidden shadow-[inset_0_0_40px_rgba(36,54,143,.4)]">
       <div className='max-w-4xl mx-auto '>
       {!posts && <Loader/>}
       {posts &&

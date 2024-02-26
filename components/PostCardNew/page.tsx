@@ -12,6 +12,9 @@ import styles from "./styles.module.scss";
 export default function PostCardNew({ post, alignment }: { post: Post; alignment?: string }) {
   const alignmentClass = alignment === "left" ? styles.alignLeft : styles.alignRight;
   const drawnAvatarClass = alignment === "left" ? styles.drawnAvatarRight : styles.drawnAvatarLeft;
+  const authorSectionAlignmentClass = alignment === "left" ? styles.authorSectionRight: styles.authorSectionLeft;
+  const articleInfoAlignmentClass = alignment === "left" ? styles.articleInfoAlignmentLeft : styles.articleInfoAlignmentRight;
+  const teaserAlignmentClass = alignment === "left" ? styles.teaserSectionLeft : styles.teaserSectionRight;
   return (
 
     <div className={styles.postCard}>
@@ -34,39 +37,38 @@ export default function PostCardNew({ post, alignment }: { post: Post; alignment
       </div>
 
       <div className={styles.infoSection}>
-
-        <div className={styles.authorSection}>
+        <div className={`${styles.authorSection} ${authorSectionAlignmentClass}`}>
           <div className={styles.authorInfo}>
             <AuthorAvatar post={post} />
             <AuthorAttribution post={post} />
           </div>
-          <div className="flex select-none justify-start space-x-2 md:hidden md:justify-end">
-            {post.metadata.categories && post.metadata.categories.map((category) => (
-              <Tag key={category.title}>{category.title}</Tag>
-            ))}
+        </div>
+        <div className={`${styles.articleInfoSection} ${articleInfoAlignmentClass}`}>
+          <div className={`${styles.teaserSection} ${teaserAlignmentClass}`}>
+            <div className={styles.teaser} dangerouslySetInnerHTML={{
+              __html: sanitize(post.metadata.teaser) ?? '',
+            }} />
           </div>
-        </div>
-        <div className="border-4 border-blue-300 overflow-hidden">
-          <div className={styles.teaser} dangerouslySetInnerHTML={{
-            __html: sanitize(post.metadata.teaser) ?? '',
-          }} />
 
-        </div>
-
-        <div className="border-8 flex items-center justify-between font-medium text-green-600 dark:text-green-200">
-          <Link href={`/posts/${post.slug}`}>
-            <div className="flex items-center space-x-2">
-              <span>Read more</span>
-              <ArrowRight className="h-4 w-4 text-inherit" />
+          <div className='flex gap-3'>
+            <div className={styles.readMore}>
+              <Link href={`/posts/${post.slug}`}>
+                <div className="flex items-center space-x-2">
+                  <span>Read more</span>
+                  <ArrowRight className="h-4 w-4 text-inherit" />
+                </div>
+              </Link>
             </div>
-          </Link>
-          <div className="hidden select-none justify-end space-x-2 md:flex ">
-            {post.metadata.categories &&
-              post.metadata.categories.map((category) => (
+
+            <div className={styles.tags}>
+              {post.metadata.categories && post.metadata.categories.map((category) => (
                 <Tag key={category.title}>{category.title}</Tag>
               ))}
+            </div>
           </div>
+
         </div>
+
         <DrawnAvatar drawnAvatarAlignment={drawnAvatarClass} />
       </div>
 

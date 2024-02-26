@@ -2,7 +2,7 @@
 
 
 .postCard{
-    @apply relative h-72 bg-grayDark my-8;
+    @apply relative  bg-grayDark my-12;
     //@include b(3px,white,solid);
 }
 .heroSection{
@@ -21,17 +21,57 @@
     @apply right-0 md:right-8 text-right;
 }
 .infoSection{
-    @apply h-24;
+    
 }
 .authorSection{
-    @apply relative m-0 flex flex-col justify-between space-y-4 md:flex-row md:space-y-0 py-2 px-4;
-    // @include b;
+    @apply relative m-0 flex  space-y-4 md:flex-row md:space-y-0 py-2 px-8;
+    //@include b;
     @at-root{
-        .authorInfo{
-            @apply flex items-center space-x-2 text-zinc-500 dark:text-zinc-400 md:space-y-0;
+        .authorSectionLeft{
+            @apply justify-start;
         }
+        .authorSectionLeft{
+            @apply justify-end;
+        }
+
+        .authorInfo{
+            @apply relative flex items-center space-x-2 text-zinc-500 dark:text-zinc-400 md:space-y-0;
+        }
+
     }
 }
+.articleInfoSection{
+    @apply flex items-center bg-primaryDark px-4 py-3;
+}
+.articleInfoAlignmentLeft{
+    @apply justify-start;
+}
+.articleInfoAlignmentRight{
+    @extend .articleInfoSection;
+    @apply flex-row-reverse justify-between;
+}
+.teaserSection{
+    @apply w-1/2 h-6 flex overflow-hidden py-0 px-4;
+    //@include b;
+}
+.teaserSectionLeft{
+    @apply left-4 text-left ;
+}
+.teaserSectionRight{
+    @apply right-4 text-right justify-end;
+}
+.teaser{
+    @apply text-zinc-500 dark:text-zinc-300;
+}
+.tags{
+    @apply flex select-none justify-start space-x-2  md:justify-end;
+}
+.readMore{
+    @apply ml-4 relative flex items-center justify-between font-medium text-green-600 dark:text-green-200;
+}
+
+
+
 .drawnAvatar{
     @apply absolute top-16  bg-primaryDark w-40 h-40 rounded-full border-8 border-primary;
 }
@@ -42,7 +82,4 @@
 .drawnAvatarLeft{
     @extends .drawnAvatar;
     @apply -left-4;
-}
-.teaser{
-    @apply text-zinc-500 dark:text-zinc-300 truncate py-0 px-4 overflow-hidden;
 }

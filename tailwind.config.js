@@ -15,9 +15,9 @@ module.exports = {
       },
       colors:{
         primaryMuted: "#626792",
-        primary: "#24368F",
+        primary: "#24368F",//rgb(36,54,143)
         primaryDark:"#152055",
-        secondary:"#EB8E00",
+        secondary:"#EB8E00",//rgb(235,142,0)
         gray:"#CCCCCC",
         grayDark:"#111122"
       },
