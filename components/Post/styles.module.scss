@@ -1,0 +1,7 @@
+@import "../../styles/mixins.scss";
+.post{
+
+}
+.hero{
+    @apply mb-5 h-[720px] w-full bg-no-repeat object-cover object-center;
+}

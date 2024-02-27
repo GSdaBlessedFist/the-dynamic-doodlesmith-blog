@@ -14,10 +14,10 @@ module.exports = {
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
       },
       colors:{
-        primaryMuted: "#626792",
-        primary: "#24368F",//rgb(36,54,143)
-        primaryDark:"#152055",
-        secondary:"#EB8E00",//rgb(235,142,0)
+        primaryMuted: "var(--color-primary-muted)",
+        primary: 'var(--color-primary)',
+        primaryDark:"var(--color-primary-dark)",
+        secondary:"var(--color-secondary)",
         gray:"#CCCCCC",
         grayDark:"#111122"
       },
@@ -25,9 +25,3 @@ module.exports = {
   },
   plugins: [],
 };
-//
-//#24368F
-//#626792
-//#CCCCCC
-//#E58D00
-//#FFFFFF

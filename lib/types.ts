@@ -5,7 +5,7 @@ export interface GlobalData {
   };
 }
 
-export interface Post {
+export interface PostType {
   id: string;
   slug: string;
   title: string;
@@ -48,7 +48,7 @@ export interface Category {
   title: string;
 }
 
-interface Theme{
+export interface Theme{
   metadata: {
     primary: string;
     primary_muted: string;

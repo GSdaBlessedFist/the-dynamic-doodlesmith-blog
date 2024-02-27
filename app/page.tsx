@@ -6,9 +6,8 @@ import Loader from "../components/Loader/page";
 import PostCardNew from '../components/PostCardNew/page';
 
 export default async function Page(): Promise<JSX.Element> {
+
   const posts = await getAllPosts();
-
-
 
   return (<>
     

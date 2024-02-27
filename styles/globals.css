@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* DEFAULT THEME */
+:root {
+  --color-primary: #24368F; 
+  --color-primary-muted: #626792;
+  --color-primary-dark: #152055;
+  --color-secondary: #EB8E00;
+}
+
+
 @layer base {
   
   h2 {
