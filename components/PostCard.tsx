@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ArrowRight from './icons/ArrowRight';
-import Tag from './Tag';
+import Tag from './Tag/page';
 import { Post } from '../lib/types';
 import AuthorAttribution from './AuthorAttribution/page';
 import AuthorAvatar from './AuthorAvatar/page';

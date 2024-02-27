@@ -1,0 +1,6 @@
+.tag{
+    @apply flex justify-center items-center  font-semibold border-2 border-primaryMuted rounded-3xl m-1 py-1 pt-2 px-3;
+}
+.tagSpan{
+    @apply pt-[3px]  uppercase leading-none text-xs  text-gray;
+}

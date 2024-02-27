@@ -2,14 +2,14 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ArrowRight from '../icons/ArrowRight';
-import Tag from '../Tag';
-import { PostType } from '../../lib/types';
+import Tag from '../Tag/page';
+import { Category,PostType } from '../../lib/types';
 import AuthorAttribution from '../AuthorAttribution/page';
 import AuthorAvatar from '../AuthorAvatar/page';
 import { sanitize } from 'isomorphic-dompurify';
 import styles from "./styles.module.scss";
 
-export default function PostCardNew({ post, alignment }: { post: Post; alignment?: string }) {
+export default function PostCardNew({ post, alignment }: { post: PostType; alignment?: string }) {
   const alignmentClass = alignment === "left" ? styles.alignLeft : styles.alignRight;
   const drawnAvatarClass = alignment === "left" ? styles.drawnAvatarRight : styles.drawnAvatarLeft;
   const authorSectionAlignmentClass = alignment === "left" ? styles.authorSectionRight: styles.authorSectionLeft;
@@ -53,7 +53,7 @@ export default function PostCardNew({ post, alignment }: { post: Post; alignment
           <div className='flex gap-3'>
             <div className={styles.readMore}>
               <Link href={`/posts/${post.slug}`}>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center ">
                   <span>Read more</span>
                   <ArrowRight className="h-4 w-4 text-inherit" />
                 </div>
@@ -61,7 +61,7 @@ export default function PostCardNew({ post, alignment }: { post: Post; alignment
             </div>
 
             <div className={styles.tags}>
-              {post.metadata.categories && post.metadata.categories.map((category) => (
+              {post.metadata.categories && post.metadata.categories.map((category:Category) => (
                 <Tag key={category.title}>{category.title}</Tag>
               ))}
             </div>
@@ -76,7 +76,7 @@ export default function PostCardNew({ post, alignment }: { post: Post; alignment
   );
 }
 
-const Title = ({ post, alignment }: { post: Post; alignment: string }) => {
+const Title = ({ post, alignment }: { post: PostType; alignment: string }) => {
   return (
     <div className={`${styles.title} ${alignment}`}>
       {post.title}

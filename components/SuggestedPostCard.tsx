@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import helpers from '../helpers';
-import { Post } from '../lib/types';
+import { PostType } from '../lib/types';
 
-export default function PostCard({ post }: { post: Post }) {
+export default function PostCard({ post }: { post: PostType }) {
   return (
     <div>
       {post.metadata.hero?.imgix_url && (
