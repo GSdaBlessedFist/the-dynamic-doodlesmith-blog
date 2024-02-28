@@ -15,7 +15,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
   const authorSectionAlignmentClass = alignment === "left" ? styles.authorSectionRight: styles.authorSectionLeft;
   const articleInfoAlignmentClass = alignment === "left" ? styles.articleInfoAlignmentLeft : styles.articleInfoAlignmentRight;
   const teaserAlignmentClass = alignment === "left" ? styles.teaserSectionLeft : styles.teaserSectionRight;
-  return (
+  return (<>
 
     <div className={styles.postCard}>
       <div className={styles.heroSection}>
@@ -30,7 +30,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
               alt={post.title}
               placeholder="blur"
               blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
-            /> */}
+            />  */}
             <Title post={post} alignment={alignmentClass} />
           </Link>
         )}
@@ -53,7 +53,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
           <div className='flex gap-3'>
             <div className={styles.readMore}>
               <Link href={`/posts/${post.slug}`}>
-                <div className="flex items-center ">
+                <div className="flex items-center space-x-2">
                   <span>Read more</span>
                   <ArrowRight className="h-4 w-4 text-inherit" />
                 </div>
@@ -62,7 +62,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
 
             <div className={styles.tags}>
               {post.metadata.categories && post.metadata.categories.map((category:Category) => (
-                <Tag key={category.title}>{category.title}</Tag>
+                <Tag key={category.title} themeColors={{primary_muted:"#626792"}}>{category.title} </Tag>
               ))}
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
       </div>
 
     </div>
-  );
+    </>);
 }
 
 const Title = ({ post, alignment }: { post: PostType; alignment: string }) => {
