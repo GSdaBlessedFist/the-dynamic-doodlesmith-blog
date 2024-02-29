@@ -1,20 +1,22 @@
-import React from 'react';
+
+
 import { getAllPosts } from '../lib/cosmic';
 import Loader from "../components/Loader/page";
 import PostCardNew from '../components/PostCardNew/page';
 import {PostType} from "../lib/types";
 
-export async function getStaticProps() {
+// export async function getServerSideProps() {
+//   const posts:PostType[] = await getAllPosts();
+//   console.log("posts:"+ posts)
+//   return {
+//     props: { posts },
+//     revalidate: 60
+//   };
+// }
+
+export default async function Page(): Promise<JSX.Element> {
+
   const posts:PostType[] = await getAllPosts();
-  return {
-    props: { posts },
-    revalidate: 60
-  };
-}
-
-export default async function Page({posts}): Promise<JSX.Element> {
-
-  
 
   return (<>
     <Loader />

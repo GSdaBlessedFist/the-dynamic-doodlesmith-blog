@@ -29,19 +29,18 @@ export default function Loader() {
       .to([bigDRef.current, "[id^=dynamic]", "[id^=doodlesmith]"], {fill: "white",duration: 1,})
       .to(".bracket", { fill: "white", opacity: 0.35, duration: 1.5 }, "-=.15");
 
-    tl.to(SVGRef.current, { autoAlpha: 0, duration: 0.25, delay: 0.15 });
-
-    // Clean up
+      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .3, delay: 0.15 });
+      tl.to(SVGRef.current,{ x:-25,y:-100,duration: 0.75},"<")
+    
     return () => {
       tl.kill();
-      if (!loaderRef.current) {
-        loaderRef.current.style.visibility = "hidden";
-      }
+      
     };
   });
 
   return (<>
-      <div ref={loaderRef} className={styles.loader}>
+      
+        <div ref={loaderRef} className={styles.loader}>
         <div className="absolute left-1/2" style={{ perspective: "275px", transformOrigin: "center", transform: "translateX(-50%)", }} >
           <div className={styles.logoContainer}>
             <svg xmlns="http://www.w3.org/2000/svg" ref={SVGRef} className={styles.dynamicDoodlesmithLogoSVG} height={height} version="1.1" viewBox="0 0 205.5 67.41" >
