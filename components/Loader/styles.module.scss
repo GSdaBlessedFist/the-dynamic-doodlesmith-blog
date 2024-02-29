@@ -1,27 +1,37 @@
+@import "../../styles/mixins.scss";
 //svg width="850" height="255"
-
+.loader{
+  @apply absolute flex justify-center items-center inset-0 bg-grayDark z-20;
+  //@include b;
+}
 .logoContainer {
-  display: flex;
+  @apply w-1/2 flex ;
   justify-content: center;
-  position: absolute;
-  top: 30%;
-  padding: 0 25px;
-  perspective: 180px;
+  padding: 0;
+  transform-origin: left;
+  transform: scale(1) translate(50%,-10%) rotateY(-15deg);
 }
 .dynamicDoodlesmithLogoSVG {
-  transform-origin: left;
-  transform: rotateY(15deg);
 }
 .bigDLetter{
   fill: white;
+  opacity: 0;
 }
 .dynamicLetter{
   fill: white;
-  opacity: 1;
+  opacity: 0;
 }
 .doodlesmithLetter{
   fill: white;
+  opacity: 0;
 }
 .bracket {
   fill: white;
+  opacity: 0;
+}
+#group-ynamic{
+  opacity:1;
+}
+#group-oodlesmith{
+  opacity:1;
 }
