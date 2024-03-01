@@ -10,7 +10,7 @@ export default function Tag({
   children,
   themeColors = { primary_muted: 'defaultColor' }, 
 }: TagProps): JSX.Element {
-  const borderColor = themeColors ? `2px ${themeColors.primary_muted} solid` : '';
+  const borderColor = themeColors ? `2px ${themeColors.primary} solid` : '';
 
   return (
     <div className={styles.tag} style={{ border: borderColor }}>

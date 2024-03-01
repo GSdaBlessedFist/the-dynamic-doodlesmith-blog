@@ -11,6 +11,8 @@ export interface PostType {
   title: string;
   metadata: {
     published_date: string;
+    tldr:string;
+    article_paragraphs: Paragraph[];
     content: string;
     hero?: {
       imgix_url?: string;
@@ -30,6 +32,10 @@ export interface PostType {
     }[];
     theme:Theme
   };
+}
+
+interface Paragraph {
+  paragraph: string;
 }
 
 export interface Author {

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import {PostType } from "../../lib/types";
+import { PostType } from "../../lib/types";
 import ArrowRight from "../icons/ArrowRight";
 import ArrowLeft from "../icons/ArrowLeft";
 import AuthorAvatar from "../AuthorAvatar/page";
@@ -19,8 +19,8 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   return (
     <>
       <div className={styles.post}>
-        <div className={styles.heroSection} style={{backgroundColor:themeColors.primary}}>
-          <Title post={post} themeColors={themeColors}/>
+        <div className={styles.heroSection} style={{ backgroundColor: themeColors.primary }}>
+          <Title post={post} themeColors={themeColors} />
           {/* {post && post.metadata.hero?.imgix_url && (
             <Image
               width={1400}
@@ -34,7 +34,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
             />
             )} */}
         </div>
-        <main className={styles.main} style={{boxShadow:`inset 0 0 40px ${boxShadowColor}`}}>
+        <main className={styles.main} style={{ boxShadow: `inset 0 0 40px ${boxShadowColor}` }}>
           <div className=" mx-auto  flex w-full flex-col items-start justify-center px-4 md:flex-row">
             <div className={styles.pageBackArrow}>
               <Link href="/" className="rounded-full border border-zinc-100 bg-white p-2   text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
@@ -42,10 +42,10 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
               </Link>
             </div>
             <div className="mr-20 flex w-full max-w-3xl flex-col justify-start md:w-3/4">
-             
+
               {post && (
                 <>
-                  <div className="flex flex-col justify-between space-y-4 py-2 md:flex-row md:space-y-0 bg-grayDark">
+                  <div className={styles.authorSection} style={{ background: themeColors.primary_muted }}>
                     <div className={styles.authorInfo}>
                       <AuthorAvatar post={post} />
                       <AuthorAttribution post={post} />
@@ -57,12 +57,19 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                         ))}
                     </div>
                   </div>
-                  <hr className="w-full border-t border-zinc-300 pb-8 dark:border-zinc-700" />
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: sanitize(post.metadata.content) ?? "",
-                    }}
-                  ></div>
+
+                  <hr className="w-full  pb-4" />
+
+                  <div className={styles.tldr}>
+                    {post.metadata.tldr && (
+                      <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.tldr) ?? "", }}></div>
+                    )}
+                  </div>
+
+                  <article className={styles.articleSection}>
+                    <h2 className={styles.introduction} style={{color:themeColors.primary}}>Introduction</h2>
+                    <div className={styles.content} dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.article_paragraphs[0].paragraph) ?? "", }}></div>
+                  </article>
                 </>
               )}
               <div className="mx-auto mt-8 w-full">
@@ -95,10 +102,10 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
 export default Post;
 
-const Title = ({ post,themeColors }: { post: PostType,themeColors:{}}) => {
+const Title = ({ post, themeColors }: { post: PostType, themeColors: {} }) => {
 
-    return (
-    <div className={styles.title} style={{color:themeColors.secondary}}>
+  return (
+    <div className={styles.title} style={{ color: themeColors.secondary }}>
       {post.title}
     </div>
   );

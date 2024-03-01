@@ -3,7 +3,7 @@
 
 
 .post{
-    @apply max-w-4xl mx-auto border-4 border-red-500;
+    @apply max-w-5xl mx-auto bg-gray;
 }
 .heroSection{
     @apply relative mb-1 h-52 flex items-center justify-center overflow-hidden bg-primary;
@@ -16,6 +16,9 @@
     transform: translateY(-50%);
     //@include b(5px,orange);
 }
+.authorSection{
+    @apply flex flex-col justify-between space-y-4 py-2 md:flex-row md:space-y-0;
+}
 .authorInfo{
     @apply flex items-center px-2 space-x-2 text-zinc-500 dark:text-zinc-400 md:space-y-0 ;
 }
@@ -27,4 +30,13 @@
 }
 .pageBackArrow{
     @apply mt-4 mr-20 flex justify-start pb-4 md:justify-center md:pb-0 md:pr-0 ;
+}
+.tldr{
+    @apply text-gray bg-grayDark p-3;
+}
+.articleSection{
+    @apply bg-white p-6 ;
+}
+.introduction{
+    @apply text-3xl;
 }

@@ -14,22 +14,22 @@ export default function Loader() {
   const height = 300;
 
   useGSAP(()=>{
-    const tl = gsap.timeline({ timeScale: 0.5 });
+    const tl = gsap.timeline({ timeScale: 2 });
 
     tl.set([leftBracketRef.current, bigDRef.current, rightBracketRef.current], {opacity: 0,})
-      .to(leftBracketRef.current, { opacity: 1, duration: 0.5 })
+      .to(leftBracketRef.current, { opacity: 1, duration: 0.25 })
       .to(leftBracketRef.current, { fill: "orange" }, "-=.15")
-      .to(bigDRef.current, { opacity: 1, duration: 0.5 })
+      .to(bigDRef.current, { opacity: 1, duration: 0.25 })
       .to(bigDRef.current, { fill: "orange" }, "-=.15")
-      .to(rightBracketRef.current, { opacity: 1, duration: 0.5 })
+      .to(rightBracketRef.current, { opacity: 1, duration: 0.25 })
       .to(rightBracketRef.current, { fill: "orange" }, "-=.15")
       .to("[id^=dynamic]",{opacity: 1,duration: 0.45,stagger: 0.1,ease: "power1.in",fill: "orange",},"<")
       .to("[id^=doodlesmith]",{ opacity: 1, duration: 0.45, stagger: 0.1, fill: "orange" },"-=1.25")
       .from(rightBracketRef.current,{ x: -123.5, duration: 1.75, ease: "back.out(1.4)" },"<")
       .to([bigDRef.current, "[id^=dynamic]", "[id^=doodlesmith]"], {fill: "white",duration: 1,})
-      .to(".bracket", { fill: "white", opacity: 0.35, duration: 1.5 }, "-=.15");
+      .to(".bracket", { fill: "white", opacity: 0.35, duration: .5 }, "-=.15");
 
-      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .3, delay: 0.15 });
+      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .25, delay: 0.15 });
       tl.to(SVGRef.current,{ x:-25,y:-100,duration: 0.75},"<")
     
     return () => {
