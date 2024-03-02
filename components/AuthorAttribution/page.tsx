@@ -1,13 +1,13 @@
-import { Post } from '../../lib/types';
+import { PostType } from '../../lib/types';
 import helpers from '../../helpers';
 
 export default function AuthorAttribution({
   post,
 }: {
-  post: Post;
+  post: PostType;
 }): JSX.Element {
   return (
-    <div className="flex space-x-1">
+    <div className="flex space-x-1 text-white">
       <span>by</span>
       <a
         href={`/author/${post.metadata.author?.slug}`}
