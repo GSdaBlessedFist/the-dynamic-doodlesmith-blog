@@ -18,6 +18,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   const boxShadowColor = hexToRGBA(themeColors.primary, 0.4);
 
 
+  
   useEffect(() => {
     document.documentElement.style.setProperty('--color-layout-primaryDark', 'hsla(230, 41%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary' ,'hsla(230, 30%, 15%, 100%)'); 
@@ -30,7 +31,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   return (
     <>
       <div className={styles.post}>
-        <div className={styles.heroSection} style={{ backgroundColor: themeColors.primary }}>
+        <div className={styles.heroSection} >
           <Title post={post} themeColors= {themeColors} />
           {post && post.metadata.hero?.imgix_url && (
             <Image
@@ -57,7 +58,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
           {post && (
             <>
-              <div className={styles.authorSection} style={{ background: themeColors.primary_muted }}>
+              <div className={styles.authorSection} style={{ background: themeColors.primary }}>
                 <div className={styles.authorInfo}>
                   <AuthorAvatar post={post} />
                   <AuthorAttribution post={post} />
@@ -72,7 +73,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <hr className={styles.hr} />
 
-              <div className={styles.tldr} style={{ background: themeColors.primary, color: "white" }}>
+              <div className={styles.tldr} style={{ background: themeColors.primary_muted, color: "white" }}>
                 {post.metadata.tldr && (
                   <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.tldr) ?? "", }}></div>
                 )}

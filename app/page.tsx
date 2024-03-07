@@ -11,6 +11,11 @@ import { useEffect, useState } from 'react';
 export default  function Page(): Promise<JSX.Element> {
   const [posts, setPosts] = useState([])
 
+
+  useEffect(() =>{
+
+  },[]);
+
   useEffect(() =>{
     document.documentElement.style.setProperty('--color-layout-primaryDark','#152055' );
     document.documentElement.style.setProperty('--color-layout-primary' ,'#24368F'); 
@@ -23,13 +28,15 @@ export default  function Page(): Promise<JSX.Element> {
       setPosts([...newPosts]);
     }
     getPosts();
+    
   }, []);
 
 
 
 
+
   return (<>
-    <Loader />
+    {/* {!Loader.isPlayed && <Loader />} */}
     <main className="	 mx-auto mt-2 max-w-5xl flex-col space-y-16 px-4 lg:px-0 overflow-hidden shadow-[inset_0_0_40px_rgba(36,54,143,.4)]">
       <div className='max-w-4xl mx-auto '>
         {/* {!posts && <Loader/>} */}

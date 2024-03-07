@@ -6,9 +6,14 @@
 .heroSection {
   @apply relative mt-2 mb-1 h-52 flex items-center justify-center overflow-hidden bg-primary;
 }
+.heroSection::after {
+  content:"";
+  @apply absolute w-full h-20 top-0 left-0 bg-gradient-to-b from-layout-primaryMuted  to-transparent mix-blend-multiply;
+}
 .hero {
   @apply object-cover;
 }
+
 .title {
   @apply absolute inline top-1/2 w-4/5 text-5xl font-bold;
   transform: translateY(-50%);

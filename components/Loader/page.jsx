@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 
 export default function Loader() {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlayed, setIsPlayed] = useState(false);
   const loaderRef = useRef();
   const SVGRef = useRef();
   const leftBracketRef = useRef();
@@ -32,6 +33,11 @@ export default function Loader() {
       tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .35,delay:1});
       tl.to(SVGRef.current,{ y:-100,ease:"power4.in",duration: 0.5},"-=.25")
     
+      tl.onComplete = () => {
+        setIsPlayed(true);
+        localStorage.setItem("loaderPlayed","true");
+      };
+
     return () => {
       tl.kill();
       
