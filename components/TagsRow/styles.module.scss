@@ -1,8 +1,9 @@
 
 
 .tagsRow{
-    @apply  max-w-5xl w-full mx-auto sticky top-10 bg-primary flex flex-wrap justify-start p-2 px-12 border-b-8 border-gray;
+    display: var(--tagsRow-view);
+    @apply  max-w-5xl w-full mx-auto sticky top-10 bg-layout-primary  flex-wrap justify-start p-2 px-12 border-b-8 border-gray;
 }
 .button{
-    @apply flex justify-center items-center text-[10px] text-gray font-semibold border-2 border-primaryMuted rounded-3xl m-1 py-1 pt-2 px-3;
+    @apply flex justify-center items-center text-[10px] text-gray font-semibold border-2 border-layout-primaryMuted rounded-3xl m-1 py-1 pt-2 px-3;
 }

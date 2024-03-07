@@ -1,5 +1,4 @@
 import React from 'react';
-import PostCard from '../../../components/PostCard';
 import { getAuthor, getAuthorPosts } from '../../../lib/cosmic';
 import PostCardNew from '../../../components/PostCardNew/page';
 

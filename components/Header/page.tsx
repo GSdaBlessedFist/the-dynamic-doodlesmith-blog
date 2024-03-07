@@ -3,20 +3,22 @@ import Link from "next/link";
 import Image from 'next/image';
 import { GlobalData } from '../../lib/types';
 import styles from "./styles.module.scss"
+import  "../../styles/globals.css";
 import logo from "../../public/images/dynamicDoodlesmithLogo.png";
 import TagsRow from '../TagsRow/page';
 
 
-export default function Header({ name }: any) {
-  return (
+export default function Header({name}:any) {
+  return (<>
     <header className={styles.header}>
+    
       <div className='flex justify-between'>
         <Logo />
         <ButtonGroup />
       </div>
       <TagsRow />
     </header>
-  );
+    </>);
 }
 
 const Logo = () => {

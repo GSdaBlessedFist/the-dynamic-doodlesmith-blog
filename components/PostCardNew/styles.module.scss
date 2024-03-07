@@ -6,10 +6,14 @@
     //@include b(3px,white,solid);
 }
 .heroSection{
-    @apply relative h-40 bg-primary;
+    @apply relative h-40 bg-primary overflow-hidden;
+}
+.heroSection:before{
+    content:"";
+    @apply absolute inset-0 bg-gradient-to-r from-primaryMuted to-transparent mix-blend-multiply;
 }
 .title{
-    @apply absolute top-1/2 w-3/4 text-5xl text-secondary font-bold ;
+    @apply absolute top-1/2 w-3/4 text-5xl text-white shadow-xl font-bold ;
     transform: translateY(-50%);
 }
 .alignLeft{

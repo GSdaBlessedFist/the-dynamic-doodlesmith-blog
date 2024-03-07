@@ -1,13 +1,20 @@
-
+"use client"
 import Link from "next/link";
 import styles from "./styles.module.scss";
 
 import { getAllCategories } from "../../lib/cosmic";
+import { useEffect, useState } from "react";
 
-const TagsRow =  async function(){
-    const tags = await getAllCategories();
-    
-    console.log(tags);
+export default function TagsRow(){
+    const [tags, setTags] = useState([]);
+
+    useEffect(() => {
+        const fetchTags = async () => {
+            const fetchedTags = await getAllCategories();
+            setTags(fetchedTags);
+        };
+        fetchTags();
+    }, []);
     return (
         <div className={styles.tagsRow}>
             {tags.map((tag,i) =>(
@@ -20,5 +27,3 @@ const TagsRow =  async function(){
         </div>
     );
 }
-
-export default TagsRow;

@@ -14,6 +14,12 @@ module.exports = {
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
       },
       colors:{
+        layout:{
+          primaryMuted: "var(--color-layout-primary-muted)",
+          primary:"var(--color-layout-primary)",
+          primaryDark:"var(--color-layout-primaryDark)",
+          secondary:"var(--color-layout-secondary)"
+        },
         primaryMuted: "var(--color-primary-muted)",
         primary: 'var(--color-primary)',
         primaryDark:"var(--color-primary-dark)",

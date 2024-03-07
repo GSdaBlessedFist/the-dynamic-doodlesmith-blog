@@ -1,3 +1,4 @@
+"use client"; /// <----------------------------?
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -10,29 +11,39 @@ import Tag from "../Tag/page";
 import { sanitize } from "isomorphic-dompurify";
 import SuggestedPostCard from "../SuggestedPostCard";
 import { hexToRGBA } from "../../utils/addOpacityToColorUtility";
+import { useEffect } from "react";
 
 const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostType[] }) => {
   const themeColors = post.metadata.theme.metadata;
   const boxShadowColor = hexToRGBA(themeColors.primary, 0.4);
 
 
+  useEffect(() => {
+    document.documentElement.style.setProperty('--color-layout-primaryDark', 'hsla(230, 41%, 15%, 100%)');
+    document.documentElement.style.setProperty('--color-layout-primary' ,'hsla(230, 30%, 15%, 100%)'); 
+    document.documentElement.style.setProperty('--color-layout-primary-muted', 'hsla(234, 20%, 48%,100%)');
+    document.documentElement.style.setProperty('--tagsRow-view',"none");
+  },[])
+
+
+
   return (
     <>
       <div className={styles.post}>
         <div className={styles.heroSection} style={{ backgroundColor: themeColors.primary }}>
-          <Title post={post} themeColors={themeColors} />
-          {/* {post && post.metadata.hero?.imgix_url && (
+          <Title post={post} themeColors= {themeColors} />
+          {post && post.metadata.hero?.imgix_url && (
             <Image
-              width={1400}
-              height={720}
-              className={styles.hero}
-              src={`${post.metadata.hero?.imgix_url}?w=1400&auto=format`}
-              priority
-              alt={post.title}
-              placeholder="blur"
-              blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
+            
+            className={styles.hero}
+            fill={true}
+            src={`${post.metadata.hero?.imgix_url}?w=1400&auto=format`}
+            priority
+            alt={post.title}
+            placeholder="blur"
+            blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
             />
-            )} */}
+            )}
         </div>
         {/* <div className={styles.pageBackArrow}>
               <Link href="/" className="rounded-full border border-zinc-100 bg-white p-2   text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
@@ -131,7 +142,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
 export default Post;
 
-const Title = ({ post, themeColors }: { post: PostType, themeColors: {} }) => {
+const Title = ({ post, themeColors }: { post: PostType, themeColors:any}) => {
 
   return (
     <div className={styles.title} style={{ color: themeColors.secondary }}>

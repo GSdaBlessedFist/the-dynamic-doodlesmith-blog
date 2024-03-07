@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Post } from '../../lib/types';
+import { PostType } from '../../lib/types';
 import styles from "./styles.module.scss";
 
-export default function AuthorAvatar({ post }: { post: Post }): JSX.Element {
+export default function AuthorAvatar({ post }: { post: PostType }): JSX.Element {
   return (
     <Link href={`/author/${post.metadata.author?.slug}`}>
       <Image

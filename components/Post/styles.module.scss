@@ -7,6 +7,7 @@
   @apply relative mt-2 mb-1 h-52 flex items-center justify-center overflow-hidden bg-primary;
 }
 .hero {
+  @apply object-cover;
 }
 .title {
   @apply absolute inline top-1/2 w-4/5 text-5xl font-bold;

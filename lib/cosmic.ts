@@ -1,5 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk';
-import { Post,GlobalData,Author,Category,Theme } from './types';
+import { PostType,GlobalData,Author,Category,Theme } from './types';
 
 const cosmic = createBucketClient({
   // @ts-ignore
@@ -29,7 +29,7 @@ export async function getGlobalData(): Promise<GlobalData> {
   return Promise.resolve({} as GlobalData);
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+export async function getAllPosts(): Promise<PostType[]> {
   try {
     // Get all posts
     const data: any = await Promise.resolve(
@@ -40,7 +40,7 @@ export async function getAllPosts(): Promise<Post[]> {
         .props('id,type,slug,title,metadata,created_at')
         .depth(1)
     );
-    const posts: Post[] = await data.objects;
+    const posts: PostType[] = await data.objects;
     return Promise.resolve(posts);
   } catch (error) {
     console.log('Oof', error);
@@ -52,7 +52,7 @@ export async function getPost({
   params,
 }: {
   params: { slug: string };
-}): Promise<Post> {
+}): Promise<PostType> {
   try {
     // Get post
     const data: any = await Promise.resolve(
@@ -69,14 +69,14 @@ export async function getPost({
   } catch (error) {
     console.log('Oof', error);
   }
-  return Promise.resolve({} as Post);
+  return Promise.resolve({} as PostType);
 }
 
 export async function getRelatedPosts({
   params,
 }: {
   params: { slug: string };
-}): Promise<Post[]> {
+}): Promise<PostType[]> {
   try {
     // Get suggested posts
     const data: any = await Promise.resolve(
@@ -91,7 +91,7 @@ export async function getRelatedPosts({
         .sort('random')
         .depth(1)
     );
-    const suggestedPosts: Post[] = await data.objects;
+    const suggestedPosts: PostType[] = await data.objects;
     return Promise.resolve(suggestedPosts);
   } catch (error) {
     console.log('Oof', error);
@@ -126,7 +126,7 @@ export async function getAuthorPosts({
   authorId,
 }: {
   authorId: string;
-}): Promise<Post[]> {
+}): Promise<PostType[]> {
   try {
     // Get Author's posts
     const data: any = await Promise.resolve(
@@ -139,7 +139,7 @@ export async function getAuthorPosts({
         .sort('random')
         .depth(1)
     );
-    const authorPosts: Post[] = await data.objects;
+    const authorPosts: PostType[] = await data.objects;
     return Promise.resolve(authorPosts);
   } catch (error) {
     console.log('Oof', error);

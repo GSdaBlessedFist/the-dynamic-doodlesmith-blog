@@ -1,7 +1,7 @@
 @import "../../styles/mixins.scss";
 
 .header{
-    @apply max-w-5xl flex flex-col justify-between sticky top-0 z-10 mx-auto bg-primaryDark backdrop-blur-2xl;
+    @apply max-w-5xl flex flex-col justify-between sticky top-0 z-10 mx-auto bg-layout-primaryDark backdrop-blur-2xl;
 }
 
 .logo{
@@ -17,7 +17,8 @@
     @apply flex flex-col lg:flex-row justify-evenly items-end mr-8 lg:mr-4 lg:items-center w-48 ;
     @at-root{
         .button{
-            @apply border-primary border-2 text-white lg:p-2;
+            @apply border-layout-primaryMuted border-2 text-white lg:p-2;
         }
     }
 }
+

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ArrowRight from '../icons/ArrowRight';
 import Tag from '../Tag/page';
-import { Category,PostType } from '../../lib/types';
+import { Category, PostType } from '../../lib/types';
 import AuthorAttribution from '../AuthorAttribution/page';
 import AuthorAvatar from '../AuthorAvatar/page';
 import { sanitize } from 'isomorphic-dompurify';
@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 export default function PostCardNew({ post, alignment }: { post: PostType; alignment?: string }) {
   const alignmentClass = alignment === "left" ? styles.alignLeft : styles.alignRight;
   const drawnAvatarClass = alignment === "left" ? styles.drawnAvatarRight : styles.drawnAvatarLeft;
-  const authorSectionAlignmentClass = alignment === "left" ? styles.authorSectionRight: styles.authorSectionLeft;
+  const authorSectionAlignmentClass = alignment === "left" ? styles.authorSectionRight : styles.authorSectionLeft;
   const articleInfoAlignmentClass = alignment === "left" ? styles.articleInfoAlignmentLeft : styles.articleInfoAlignmentRight;
   const teaserAlignmentClass = alignment === "left" ? styles.teaserSectionLeft : styles.teaserSectionRight;
   return (<>
@@ -21,17 +21,17 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
       <div className={styles.heroSection}>
         {post.metadata.hero?.imgix_url && (
           <Link href={`/posts/${post.slug}`}>
-            {/* <Image
-              width={2800}
-              height={400}
-              className="mb-0 h-48 w-full rounded-xl bg-no-repeat object-cover object-center transition-transform duration-200 ease-out hover:scale-[1.02]"
+            <Title post={post} alignment={alignmentClass} />
+            <Image
+              width={800}
+              height={302}
+              className="mb-0 h-48 w-full rounded-xl bg-no-repeat object-cover  transition-transform duration-200 ease-out hover:scale-[1.02]"
               src={`${post.metadata.hero?.imgix_url}?w=1400&auto=format`}
               priority
               alt={post.title}
               placeholder="blur"
-              blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
-            />  */}
-            <Title post={post} alignment={alignmentClass} />
+              blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,&q=1&blur=500&w=2`}
+            />
           </Link>
         )}
       </div>
@@ -61,8 +61,8 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
             </div>
 
             <div className={styles.tags}>
-              {post.metadata.categories && post.metadata.categories.map((category:Category) => (
-                <Tag key={category.title} themeColors={{primary_muted:"#626792"}}>{category.title} </Tag>
+              {post.metadata.categories && post.metadata.categories.map((category:Category ) => (
+                <Tag key={category.slug} themeColors={{ primary:"",primary_muted: "#626792" }}>{category.title} </Tag>
               ))}
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
       </div>
 
     </div>
-    </>);
+  </>);
 }
 
 const Title = ({ post, alignment }: { post: PostType; alignment: string }) => {
@@ -87,7 +87,7 @@ const Title = ({ post, alignment }: { post: PostType; alignment: string }) => {
 const DrawnAvatar = ({ drawnAvatarAlignment }: { drawnAvatarAlignment: string }) => {
   return (
     <div className={`${styles.drawnAvatar} ${drawnAvatarAlignment}`}>
-        {/* <Image src={"/images/hmm.png"} width={200} height={250} alt={"thinking about it"} /> */}
+      <Image src={"/images/hmm.png"} width={200} height={250} alt={"thinking about it"} />
     </div>
   );
 }

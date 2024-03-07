@@ -8,11 +8,22 @@
   --color-primary-muted: #626792;
   --color-primary-dark: #152055;
   --color-secondary: #EB8E00;
+  /*these will be updated on Post page*/
+  --color-layout-primary: var(--color-primary);
+  /* --color-layout-primary: hsla(230, 30%, 35%, 50%);  */
+  --color-layout-primary-muted: var(--color-primary-muted);
+  /* --color-layout-primary-muted: hsl(234, 20%, 48%); */
+  --color-layout-primaryDark: var(--color-primary-dark);
+  /* --color-layout-primaryDark: hsla(230, 41%, 21%, 50%); */
+  --color-layout-secondary:#EB8E00;
+
+  --tagsRow-view: flex;
 }
 
-
 @layer base {
-  
+  body{
+    @apply bg-black;
+  }
   h2 {
     @apply mb-4 mt-2 text-3xl font-bold leading-tight tracking-tighter text-zinc-700 dark:text-zinc-300;
   }

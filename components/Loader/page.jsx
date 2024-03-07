@@ -14,7 +14,7 @@ export default function Loader() {
   const height = 300;
 
   useGSAP(()=>{
-    const tl = gsap.timeline({ timeScale: 2 });
+    const tl = gsap.timeline({ timeScale: 3 });
 
     tl.set([leftBracketRef.current, bigDRef.current, rightBracketRef.current], {opacity: 0,})
       .to(leftBracketRef.current, { opacity: 1, duration: 0.25 })
@@ -27,10 +27,10 @@ export default function Loader() {
       .to("[id^=doodlesmith]",{ opacity: 1, duration: 0.45, stagger: 0.1, fill: "orange" },"-=1.25")
       .from(rightBracketRef.current,{ x: -123.5, duration: 1.75, ease: "back.out(1.4)" },"<")
       .to([bigDRef.current, "[id^=dynamic]", "[id^=doodlesmith]"], {fill: "white",duration: 1,})
-      .to(".bracket", { fill: "white", opacity: 0.35, duration: .5 }, "-=.15");
+      .to(["#bracket-left","#bracket-right"], { fill: "white", opacity: 0.35, duration: .5 });
 
-      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .25, delay: 0.15 });
-      tl.to(SVGRef.current,{ x:-25,y:-100,duration: 0.75},"<")
+      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .35,delay:1});
+      tl.to(SVGRef.current,{ y:-100,ease:"power4.in",duration: 0.5},"-=.25")
     
     return () => {
       tl.kill();

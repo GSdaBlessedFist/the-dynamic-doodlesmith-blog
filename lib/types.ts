@@ -49,7 +49,7 @@ export interface Author {
 }
 
 export interface Category {
-  slug: string;
+  slug?: string;
   title: string;
 }
 
