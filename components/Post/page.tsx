@@ -112,14 +112,15 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <article className={styles.articleSection}>
                 <h2 className={styles.introduction} style={{ color: themeColors.primary }}>Introduction</h2>
-                <p style={{ color: themeColors.primary_dark }}>{post.metadata["introduction_body"]}</p>
+                {/* <p style={{ color: themeColors.primary_dark }}>{post.metadata["introduction_body"]}</p> */}
+                <div style={{ color: themeColors.primary_dark }} dangerouslySetInnerHTML={{ __html: sanitize(post.metadata["introduction_body"]) ?? "", }}></div>
 
                 <button style={{background:`${themeColors.primary_muted}`}} className={`${styles.classificationButton} `} onClick={hideExplaination}>{displayOptionMessage}</button>
 
                 {articleSections.map((section, index) => (
                   <div key={`section-${section.section_title}`}>
                     <div className={styles.header} style={{ color: themeColors.primary_muted }}>{section.section_title}</div>
-                    <div className={` border-2 border-teal-600 ${explainationsHidden && section.classification === "explaination" ? styles.explaination : ""}`} dangerouslySetInnerHTML={{ __html: sanitize(section["section_body"]) ?? "", }}></div>
+                    <div className={` border-2 border-teal-600 ${explainationsHidden && section.classification === "explaination" ? styles.explaination : ""}`} dangerouslySetInnerHTML={{ __html: sanitize(section.section_body) ?? "", }}></div>
 
                   </div>
                 ))}
