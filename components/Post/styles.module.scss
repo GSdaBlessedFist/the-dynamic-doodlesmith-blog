@@ -7,7 +7,7 @@
   @apply relative mt-2 mb-1 h-52 flex items-center justify-center overflow-hidden bg-primary;
 }
 .heroSection::after {
-  content:"";
+  content: "";
   @apply absolute w-full h-20 top-0 left-0 bg-gradient-to-b from-layout-primaryMuted  to-transparent mix-blend-multiply;
 }
 .hero {
@@ -41,13 +41,14 @@
   @apply w-full text-white py-8 px-24;
 }
 .articleSection {
-  @apply bg-white p-6 px-24;
+  @apply flex flex-col items-start bg-white p-6 px-24;
+  transform-origin: bottom ;
   @at-root {
     .introduction {
       @apply text-3xl;
     }
     .header {
-      @apply text-2xl;
+      @apply text-2xl font-bold;
     }
     .articleGrid {
       @apply grid;
@@ -59,24 +60,32 @@
         "section2 section2 section2 pic2 "
         "section2 section2 section2 pic2 ";
     }
-    .articlePic1{
-        grid-area: pic1;
-        @include b;
+    .articlePic1 {
+      grid-area: pic1;
+      @include b;
     }
-    .articlePic2{
-        grid-area: pic2;
-        @include b;
+    .articlePic2 {
+      grid-area: pic2;
+      @include b;
     }
-    .section{
-        @apply px-4;
+    .section {
+      @apply px-4;
     }
-    .section1{
-        grid-area: section1;
-        @extend .section;
+    .section1 {
+      grid-area: section1;
+      @extend .section;
     }
-    .section2{
-        grid-area: section2;
-        @extend .section;
+    .section2 {
+      grid-area: section2;
+      @extend .section;
     }
   }
 }
+
+.classificationButton {
+  @apply m-4 p-3 rounded-full border-4 font-semibold text-white;
+}
+.explaination {
+  @apply hidden;
+}
+

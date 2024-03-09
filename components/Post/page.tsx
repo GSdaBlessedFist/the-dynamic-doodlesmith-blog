@@ -11,22 +11,42 @@ import Tag from "../Tag/page";
 import { sanitize } from "isomorphic-dompurify";
 import SuggestedPostCard from "../SuggestedPostCard";
 import { hexToRGBA } from "../../utils/addOpacityToColorUtility";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostType[] }) => {
   const themeColors = post.metadata.theme.metadata;
   const boxShadowColor = hexToRGBA(themeColors.primary, 0.4);
   const articleSections = post.metadata.article_sections.sections;
-  //const 
+  const [explainationsHidden, setExplainationsHidden] = useState(false);
+  const [displayOptionMessage, setDisplayOptionMessage] = useState("Instructions Only");
+
+  function hideExplaination(e: any) {
+    let option;
+    switch (displayOptionMessage) {
+      case "Instructions Only":
+        option = "Include Explainations"
+        break;
+      case "Include Explainations":
+        option = "Instructions Only";
+        break;
+      default: return
+    }
+    console.log(option)
+    setExplainationsHidden(prevState => !prevState)
+    setDisplayOptionMessage(option);
+  }
 
 
+  useEffect(() => {
+    console.log(explainationsHidden)
+  }, [explainationsHidden])
 
   useEffect(() => {
     document.documentElement.style.setProperty('--color-layout-primaryDark', 'hsla(230, 41%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary', 'hsla(230, 30%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary-muted', 'hsla(234, 20%, 48%,100%)');
     document.documentElement.style.setProperty('--tagsRow-view', "none");
-    console.log(articleSections)
+    console.log(articleSections[0].classification)
   }, [])
 
 
@@ -55,9 +75,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
               </Link>
             </div> */}
         <main className={styles.main} style={{ boxShadow: `inset 0 0 40px ${boxShadowColor}` }}>
-          {/* <div className=" mx-auto  flex w-full flex-col items-start justify-center px-4 md:flex-row border-4"> */}
-
-          {/* <div className="mr-20 flex w-full max-w-3xl flex-col justify-start md:w-3/4"> */}
+          
 
           {post && (
             <>
@@ -81,10 +99,13 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                   <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.tldr) ?? "", }}></div>
                 )}
               </div>
-              {/* ******************************************************* */}
-              {/* ******************************************************* */}
-              {/* ******************************************************* */}
-
+              
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
 
 
 
@@ -93,21 +114,24 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                 <h2 className={styles.introduction} style={{ color: themeColors.primary }}>Introduction</h2>
                 <p style={{ color: themeColors.primary_dark }}>{post.metadata["introduction_body"]}</p>
 
-                {articleSections.map((section, index) => (<>
-                  <div key={`section-${section.section_title}`} className="border-2 border-teal-600">
-                    <div dangerouslySetInnerHTML={{ __html: sanitize(section["section_body"]) ?? "", }}></div>
+                <button style={{background:`${themeColors.primary_muted}`}} className={`${styles.classificationButton} `} onClick={hideExplaination}>{displayOptionMessage}</button>
+
+                {articleSections.map((section, index) => (
+                  <div key={`section-${section.section_title}`}>
+                    <div className={styles.header} style={{ color: themeColors.primary_muted }}>{section.section_title}</div>
+                    <div className={` border-2 border-teal-600 ${explainationsHidden && section.classification === "explaination" ? styles.explaination : ""}`} dangerouslySetInnerHTML={{ __html: sanitize(section["section_body"]) ?? "", }}></div>
+
                   </div>
-                </>))}
-
-
-
+                ))}
               </article>
             </>
           )}
 
 
 
-
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
+          {/* ******************************************************* */}
           {/* ******************************************************* */}
           {/* ******************************************************* */}
           {/* ******************************************************* */}
