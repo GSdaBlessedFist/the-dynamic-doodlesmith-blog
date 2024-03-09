@@ -16,15 +16,18 @@ import { useEffect } from "react";
 const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostType[] }) => {
   const themeColors = post.metadata.theme.metadata;
   const boxShadowColor = hexToRGBA(themeColors.primary, 0.4);
+  const articleSections = post.metadata.article_sections.sections;
+  //const 
 
 
-  
+
   useEffect(() => {
     document.documentElement.style.setProperty('--color-layout-primaryDark', 'hsla(230, 41%, 15%, 100%)');
-    document.documentElement.style.setProperty('--color-layout-primary' ,'hsla(230, 30%, 15%, 100%)'); 
+    document.documentElement.style.setProperty('--color-layout-primary', 'hsla(230, 30%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary-muted', 'hsla(234, 20%, 48%,100%)');
-    document.documentElement.style.setProperty('--tagsRow-view',"none");
-  },[])
+    document.documentElement.style.setProperty('--tagsRow-view', "none");
+    console.log(articleSections)
+  }, [])
 
 
 
@@ -32,19 +35,19 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
     <>
       <div className={styles.post}>
         <div className={styles.heroSection} >
-          <Title post={post} themeColors= {themeColors} />
+          <Title post={post} themeColors={themeColors} />
           {post && post.metadata.hero?.imgix_url && (
             <Image
-            
-            className={styles.hero}
-            fill={true}
-            src={`${post.metadata.hero?.imgix_url}?w=1400&auto=format`}
-            priority
-            alt={post.title}
-            placeholder="blur"
-            blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
+
+              className={styles.hero}
+              fill={true}
+              src={`${post.metadata.hero?.imgix_url}?w=1400&auto=format`}
+              priority
+              alt={post.title}
+              placeholder="blur"
+              blurDataURL={`${post.metadata.hero?.imgix_url}?auto=format,compress&q=1&blur=500&w=2`}
             />
-            )}
+          )}
         </div>
         {/* <div className={styles.pageBackArrow}>
               <Link href="/" className="rounded-full border border-zinc-100 bg-white p-2   text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
@@ -73,7 +76,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <hr className={styles.hr} />
 
-              <div className={styles.tldr} style={{ background: themeColors.primary_muted, color: "white" }}>
+              <div className={styles.tldr} style={{ background: themeColors.primary_muted, borderBottom: `5px ${themeColors.primary_dark} solid`, color: "white" }}>
                 {post.metadata.tldr && (
                   <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.tldr) ?? "", }}></div>
                 )}
@@ -88,20 +91,16 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <article className={styles.articleSection}>
                 <h2 className={styles.introduction} style={{ color: themeColors.primary }}>Introduction</h2>
-                <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.article_sections[0].section) ?? "", }}></div>
+                <p style={{ color: themeColors.primary_dark }}>{post.metadata["introduction_body"]}</p>
 
-                <div className={styles.articleGrid}>
-                  <div className={styles.articlePic1}></div>
-                  <div className={`${styles.section} ${styles.section1}`}>
-                    <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.article_sections[1].section) ?? "", }}></div>
+                {articleSections.map((section, index) => (<>
+                  <div key={`section-${section.section_title}`} className="border-2 border-teal-600">
+                    <div dangerouslySetInnerHTML={{ __html: sanitize(section["section_body"]) ?? "", }}></div>
                   </div>
+                </>))}
 
-                  <div className={styles.articlePic2}></div>
-                  <div className={`${styles.section} ${styles.section2}`}>
-                    <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.article_sections[2].section) ?? "", }}></div>
-                  </div>
 
-                </div>
+
               </article>
             </>
           )}
@@ -143,7 +142,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
 export default Post;
 
-const Title = ({ post, themeColors }: { post: PostType, themeColors:any}) => {
+const Title = ({ post, themeColors }: { post: PostType, themeColors: any }) => {
 
   return (
     <div className={styles.title} style={{ color: themeColors.secondary }}>

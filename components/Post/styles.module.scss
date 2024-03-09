@@ -46,6 +46,9 @@
     .introduction {
       @apply text-3xl;
     }
+    .header {
+      @apply text-2xl;
+    }
     .articleGrid {
       @apply grid;
       grid-template-columns: 20% 30% 30% 20%;

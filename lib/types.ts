@@ -12,7 +12,8 @@ export interface PostType {
   metadata: {
     published_date: string;
     tldr:string;
-    article_sections: Section[];
+    "introduction_body": string;
+    "article_sections": Sections;
     hero?: {
       imgix_url?: string;
     };
@@ -33,8 +34,14 @@ export interface PostType {
   };
 }
 
-interface Section {
-  section: string;
+interface Sections {
+  sections: SubSection[];
+}
+
+interface SubSection {
+  section_title:string;
+  section_body:string;
+  classification : string;
 }
 
 export interface Author {
