@@ -53,7 +53,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
   return (
     <>
-      <div className={styles.post}>
+      <div className={`${styles.post} openSansFont`}>
         <div className={styles.heroSection} >
           <Title post={post} themeColors={themeColors} />
           {post && post.metadata.hero?.imgix_url && (
