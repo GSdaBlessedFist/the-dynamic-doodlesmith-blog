@@ -21,6 +21,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 250px;
+  }
   body{
     @apply bg-black;
   }

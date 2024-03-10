@@ -118,7 +118,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                 <button style={{background:`${themeColors.primary_muted}`}} className={`${styles.classificationButton} `} onClick={hideExplaination}>{displayOptionMessage}</button>
 
                 {articleSections.map((section, index) => (
-                  <div key={`section-${section.section_title}`}>
+                  <div key={`section-${section.section_title}`} id={section.section_title}>
                     <div className={styles.header} style={{ color: themeColors.primary_muted }}>{section.section_title}</div>
                     <div className={` border-2 border-teal-600 ${explainationsHidden && section.classification === "explaination" ? styles.explaination : ""}`} dangerouslySetInnerHTML={{ __html: sanitize(section.section_body) ?? "", }}></div>
 
