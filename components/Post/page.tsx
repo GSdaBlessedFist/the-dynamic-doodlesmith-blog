@@ -12,6 +12,7 @@ import { sanitize } from "isomorphic-dompurify";
 import SuggestedPostCard from "../SuggestedPostCard";
 import { hexToRGBA } from "../../utils/addOpacityToColorUtility";
 import { useEffect, useState } from "react";
+import Markdown from 'react-markdown'
 
 const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostType[] }) => {
   const themeColors = post.metadata.theme.metadata;
@@ -36,6 +37,13 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
     setDisplayOptionMessage(option);
   }
 
+  const articleBodyMarkdown = {
+    p:({...props})=>(<p className="text-grayDark text-xl tracking-wide my-2" {...props} />),
+    b:({...props})=>(<b className="text-[#428A7F]" {...props} />),
+    li:({...props})=>(<li className="text-lg my-2 " {...props}/>),
+    a: ({...props}) => (<a className="text-md text-[#428A7F] tracking-normal font-bold" {...props} target="_blank" rel="noopener noreferrer" />),
+    pre:({...props}) =>(<pre {...props} className={`mb-4 bg-slate-800 text-green-600 p-3`}/>)
+  }
 
   useEffect(() => {
     console.log(explainationsHidden)
@@ -111,16 +119,14 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
 
               <article className={styles.articleSection}>
-                <h2 className={styles.introduction} style={{ color: themeColors.primary }}>Introduction</h2>
-                {/* <p style={{ color: themeColors.primary_dark }}>{post.metadata["introduction_body"]}</p> */}
-                <div style={{ color: themeColors.primary_dark }} dangerouslySetInnerHTML={{ __html: sanitize(post.metadata["introduction_body"]) ?? "", }}></div>
-
-                <button style={{background:`${themeColors.primary_muted}`}} className={`${styles.classificationButton} `} onClick={hideExplaination}>{displayOptionMessage}</button>
+                
 
                 {articleSections.map((section, index) => (
                   <div key={`section-${section.section_title}`} id={section.section_title}>
-                    <div className={styles.header} style={{ color: themeColors.primary_muted }}>{section.section_title}</div>
-                    <div className={` border-2 border-teal-600 ${explainationsHidden && section.classification === "explaination" ? styles.explaination : ""}`} dangerouslySetInnerHTML={{ __html: sanitize(section.section_body) ?? "", }}></div>
+                    <div className={styles.header} style={{ color: themeColors.primary }}>{section.section_title}</div>
+                    <div>
+                    <Markdown components={articleBodyMarkdown}>{section.section_body}</Markdown>
+                    </div>
 
                   </div>
                 ))}
