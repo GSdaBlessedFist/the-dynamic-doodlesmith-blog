@@ -38,11 +38,13 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   }
 
   const articleBodyMarkdown = {
-    p:({...props})=>(<p className="text-grayDark text-xl tracking-wide my-2" {...props} />),
+    p:({...props})=>(<p className="text-slate-600 text-xl tracking-wide my-6" {...props} />),
     b:({...props})=>(<b className="text-[#428A7F]" {...props} />),
-    li:({...props})=>(<li className="text-lg my-2 " {...props}/>),
-    a: ({...props}) => (<a className="text-md text-[#428A7F] tracking-normal font-bold" {...props} target="_blank" rel="noopener noreferrer" />),
-    pre:({...props}) =>(<pre {...props} className={`mb-4 bg-slate-800 text-green-600 p-3`}/>)
+    h2:({...props})=>(<h2 className="text-[#428A7F]" {...props} />),
+    h3:({...props})=>(<h3 className=" text-slate-600 font-bold " {...props} />),
+    li:({...props})=>(<li className="text-lg ml-5 my-4 text-slate-600 " {...props}/>),
+    a: ({...props}) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props}/>),
+    pre:({...props}) =>(<pre {...props} className={`mb-6 bg-slate-800 text-green-600 p-3`}/>)
   }
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
     document.documentElement.style.setProperty('--color-layout-primary', 'hsla(230, 30%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary-muted', 'hsla(234, 20%, 48%,100%)');
     document.documentElement.style.setProperty('--tagsRow-view', "none");
-    console.log(articleSections[0].classification)
+    console.log(articleSections)
   }, [])
 
 
@@ -122,7 +124,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                 
 
                 {articleSections.map((section, index) => (
-                  <div key={`section-${section.section_title}`} id={section.section_title}>
+                  <div key={`section-${section.section_title}`} id={section.section_slug}>
                     <div className={styles.header} style={{ color: themeColors.primary }}>{section.section_title}</div>
                     <div>
                     <Markdown components={articleBodyMarkdown}>{section.section_body}</Markdown>
