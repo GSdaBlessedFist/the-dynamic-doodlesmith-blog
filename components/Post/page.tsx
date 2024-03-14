@@ -38,13 +38,13 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   }
 
   const articleBodyMarkdown = {
-    p:({...props})=>(<p className="text-slate-600 text-xl tracking-wide my-6" {...props} />),
-    b:({...props})=>(<b className="text-[#428A7F]" {...props} />),
-    h2:({...props})=>(<h2 className="text-[#428A7F]" {...props} />),
-    h3:({...props})=>(<h3 className=" text-slate-600 font-bold " {...props} />),
-    li:({...props})=>(<li className="text-lg ml-5 my-4 text-slate-600 " {...props}/>),
-    a: ({...props}) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props}/>),
-    pre:({...props}) =>(<pre {...props} className={`mb-6 bg-slate-800 text-green-600 p-3`}/>)
+    p: ({ ...props }) => (<p className="text-slate-600 text-xl tracking-wide my-6" {...props} />),
+    b: ({ ...props }) => (<b className="text-[#428A7F]" {...props} />),
+    h2: ({ ...props }) => (<h2 className="text-[#428A7F]" {...props} />),
+    h3: ({ ...props }) => (<h3 className=" text-slate-600 font-bold " {...props} />),
+    li: ({ ...props }) => (<li className="text-lg ml-5 my-4 text-slate-600 list-decimal" {...props} />),
+    a: ({ ...props }) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props} />),
+    pre: ({ ...props }) => (<pre {...props} className={`mb-6 mx-auto max-w-[840px] overflow-x-auto block break-words bg-slate-800 text-green-600 p-3 rounded-md`} />)
   }
 
   useEffect(() => {
@@ -79,13 +79,10 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
             />
           )}
         </div>
-        {/* <div className={styles.pageBackArrow}>
-              <Link href="/" className="rounded-full border border-zinc-100 bg-white p-2   text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
-                <ArrowLeft className="h-4 w-4 " />
-              </Link>
-            </div> */}
+
+
         <main className={styles.main} style={{ boxShadow: `inset 0 0 40px ${boxShadowColor}` }}>
-          
+
 
           {post && (
             <>
@@ -104,35 +101,43 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <hr className={styles.hr} />
 
+
               <div className={styles.tldr} style={{ background: themeColors.primary_muted, borderBottom: `5px ${themeColors.primary_dark} solid`, color: "white" }}>
                 {post.metadata.tldr && (
                   <div dangerouslySetInnerHTML={{ __html: sanitize(post.metadata.tldr) ?? "", }}></div>
                 )}
               </div>
-              
-          {/* ******************************************************* */}
-          {/* ******************************************************* */}
-          {/* ******************************************************* */}
-          {/* ******************************************************* */}
-          {/* ******************************************************* */}
-          {/* ******************************************************* */}
+
+              {/* ******************************************************* */}
+              {/* ******************************************************* */}
+              {/* ******************************************************* */}
+              {/* ******************************************************* */}
+              {/* ******************************************************* */}
+              {/* ******************************************************* */}
 
 
 
 
               <article className={styles.articleSection}>
-                
-
+                <div className={styles.underlay}></div>
+                  
                 {articleSections.map((section, index) => (
                   <div key={`section-${section.section_title}`} id={section.section_slug}>
                     <div className={styles.header} style={{ color: themeColors.primary }}>{section.section_title}</div>
                     <div>
-                    <Markdown components={articleBodyMarkdown}>{section.section_body}</Markdown>
+                      <Markdown className="bg-transparent" components={articleBodyMarkdown}>{section.section_body}</Markdown>
                     </div>
 
                   </div>
                 ))}
+                {/* <div className={styles.pageBackArrow}>
+                  <Link href="/" className="rounded-full border border-zinc-100 bg-white p-6  opacity-25 text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
+                    <ArrowLeft className="h-16 w-16 " />
+                  </Link>
+                </div> */}
+                
               </article>
+
             </>
           )}
 

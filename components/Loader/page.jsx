@@ -15,22 +15,22 @@ export default function Loader() {
   const height = 300;
 
   useGSAP(()=>{
-    const tl = gsap.timeline({ timeScale: 3 });
+    const tl = gsap.timeline({duration: 2  });
 
     tl.set([leftBracketRef.current, bigDRef.current, rightBracketRef.current], {opacity: 0,})
-      .to(leftBracketRef.current, { opacity: 1, duration: 0.25 })
-      .to(leftBracketRef.current, { fill: "orange" }, "-=.15")
-      .to(bigDRef.current, { opacity: 1, duration: 0.25 })
-      .to(bigDRef.current, { fill: "orange" }, "-=.15")
-      .to(rightBracketRef.current, { opacity: 1, duration: 0.25 })
-      .to(rightBracketRef.current, { fill: "orange" }, "-=.15")
-      .to("[id^=dynamic]",{opacity: 1,duration: 0.45,stagger: 0.1,ease: "power1.in",fill: "orange",},"<")
-      .to("[id^=doodlesmith]",{ opacity: 1, duration: 0.45, stagger: 0.1, fill: "orange" },"-=1.25")
-      .from(rightBracketRef.current,{ x: -123.5, duration: 1.75, ease: "back.out(1.4)" },"<")
+      .to(leftBracketRef.current, { opacity: 1, duration: 0.15 })
+      .to(leftBracketRef.current, { fill: "orange" }, "-=.05")
+      .to(bigDRef.current, { opacity: 1, duration: 0.15 })
+      .to(bigDRef.current, { fill: "orange" }, "-=.05")
+      .to(rightBracketRef.current, { opacity: 1, duration: 0.15 })
+      .to(rightBracketRef.current, { fill: "orange" }, "-=.05")
+      .to("[id^=dynamic]",{opacity: 1,duration: 0.25,stagger: 0.1,ease: "power1.in",fill: "orange",},"<")
+      .to("[id^=doodlesmith]",{ opacity: 1, duration: 0.25, stagger: 0.1, fill: "orange" },"-=1.25")
+      .from(rightBracketRef.current,{ x: -123.5, duration: 1.5, ease: "back.out(1.4)" },"<")
       .to([bigDRef.current, "[id^=dynamic]", "[id^=doodlesmith]"], {fill: "white",duration: 1,})
       .to(["#bracket-left","#bracket-right"], { fill: "white", opacity: 0.35, duration: .5 });
 
-      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .35,delay:1});
+      tl.to(loaderRef.current, {autoAlpha: 0,filter:"blur(10px)", duration: .15,delay:1});
       tl.to(SVGRef.current,{ y:-100,ease:"power4.in",duration: 0.5},"-=.25")
     
       tl.onComplete = () => {
