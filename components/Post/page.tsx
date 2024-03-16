@@ -21,35 +21,29 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   const [explainationsHidden, setExplainationsHidden] = useState(false);
   const [displayOptionMessage, setDisplayOptionMessage] = useState("Instructions Only");
 
-  function hideExplaination(e: any) {
-    let option;
-    switch (displayOptionMessage) {
-      case "Instructions Only":
-        option = "Include Explainations"
-        break;
-      case "Include Explainations":
-        option = "Instructions Only";
-        break;
-      default: return
-    }
-    console.log(option)
-    setExplainationsHidden(prevState => !prevState)
-    setDisplayOptionMessage(option);
-  }
+  
 
   const articleBodyMarkdown = {
-    p: ({ ...props }) => (<p className="text-slate-600 text-xl tracking-wide my-6" {...props} />),
-    b: ({ ...props }) => (<b className="text-[#428A7F]" {...props} />),
-    h2: ({ ...props }) => (<h2 className="text-[#428A7F]" {...props} />),
-    h3: ({ ...props }) => (<h3 className=" text-slate-600 font-bold " {...props} />),
-    li: ({ ...props }) => (<li className="text-lg ml-5 my-4 text-slate-600 list-decimal" {...props} />),
-    a: ({ ...props }) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props} />),
-    pre: ({ ...props }) => (<pre {...props} className={`mb-6 mx-auto max-w-[840px] overflow-x-auto block break-words bg-slate-800 text-green-600 p-3 rounded-md`} />)
+    p: ({ ...props }) => (<p className="w-full px-6 py-3 text-slate-600 text-xl tracking-wide my-6 " {...props} />),
+    strong: ({ ...props }) => (<strong style={{color:themeColors.primary_dark}} {...props} />),
+    h2: ({ ...props }) => (<h2 style={{color:themeColors.primary}} {...props} />),
+    h3: ({ ...props }) => (<h3 style={{color:themeColors.primary_dark}} className=" font-bold text-3xl" {...props} />),
+    h4: ({ ...props }) => (<h4 style={{color:themeColors.primary_muted}} className="px-8 font-bold text-3xl" {...props} />),
+    li: ({ ...props }) => (<li className="text-lg ml-16 my-4 text-slate-600 list-decimal" {...props} />),
+    // a: ({ ...props }) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props} />),
+    a: ({ ...props }) => {
+      if (props.href.startsWith('#')) {
+        return (<Link href={props.href} className="tracking-normal font-bold" style={{color:themeColors.primary}} {...props}></Link>)
+      }else{
+        return (<Link href={props.href} className="tracking-normal font-bold" style={{color:themeColors.primary}} {...props} target="_blank" rel="noopener noreferrer"></Link>)
+      }
+      
+    },
+    pre: ({ ...props }) => (<pre {...props} className={`mb-6 mx-4 w-[96%] overflow-x-auto block  bg-slate-800  p-3 rounded-md`} style={{color:themeColors.primary_muted}}/>),
+    code: ({ ...props }) => (<code {...props} className={` text-base`} />)
   }
 
-  useEffect(() => {
-    console.log(explainationsHidden)
-  }, [explainationsHidden])
+  
 
   useEffect(() => {
     document.documentElement.style.setProperty('--color-layout-primaryDark', 'hsla(230, 41%, 15%, 100%)');
@@ -101,6 +95,13 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <hr className={styles.hr} />
 
+              <div className="bg-grayDark w-full text-center p-6">
+                <div className="text-[1.75rem] font-bold text-white">
+                {post.title}
+                </div>
+                
+              </div>
+
 
               <div className={styles.tldr} style={{ background: themeColors.primary_muted, borderBottom: `5px ${themeColors.primary_dark} solid`, color: "white" }}>
                 {post.metadata.tldr && (
@@ -125,7 +126,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                   <div key={`section-${section.section_title}`} id={section.section_slug}>
                     <div className={styles.header} style={{ color: themeColors.primary }}>{section.section_title}</div>
                     <div>
-                      <Markdown className="bg-transparent" components={articleBodyMarkdown}>{section.section_body}</Markdown>
+                      <Markdown className="max-w-[924px] bg-transparent overflow-hidden" components={articleBodyMarkdown}>{section.section_body}</Markdown>
                     </div>
 
                   </div>

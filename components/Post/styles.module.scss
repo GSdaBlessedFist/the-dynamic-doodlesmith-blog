@@ -41,7 +41,7 @@
   @apply w-full text-white py-4 px-24;
 }
 .articleSection {
-  @apply relative my-0 flex flex-col items-start bg-white p-6 px-24 overflow-hidden;
+  @apply relative my-0 flex flex-col items-start bg-white p-6 px-12 overflow-hidden;
   transform-origin: bottom;
   @include b;
   @at-root {
