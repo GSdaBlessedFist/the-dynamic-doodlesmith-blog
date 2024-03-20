@@ -43,7 +43,7 @@
 .articleSection {
   @apply relative my-0 flex flex-col items-start bg-white p-6 px-12 overflow-hidden;
   transform-origin: bottom;
-  @include b;
+  //@include b;
   @at-root {
     // .pageBackArrow {
     //   @apply fixed top-[60%] left-0  flex justify-start pb-4 md:justify-center md:pb-0 md:pr-0 z-10;
@@ -54,7 +54,7 @@
     //   @apply text-3xl;
     // }
     .header {
-      @apply my-8 text-3xl font-bold;
+      @apply my-4 text-3xl font-bold;
     }
 
     .section {

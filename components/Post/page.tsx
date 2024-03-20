@@ -24,12 +24,12 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
   
 
   const articleBodyMarkdown = {
-    p: ({ ...props }) => (<p className="w-full px-6 py-3 text-slate-600 text-xl tracking-wide my-6 " {...props} />),
+    p: ({ ...props }) => (<p className="w-full px-6 py-3 text-slate-600 text-xl tracking-wide my-4 " {...props} />),
     strong: ({ ...props }) => (<strong style={{color:themeColors.primary_dark}} {...props} />),
     h2: ({ ...props }) => (<h2 style={{color:themeColors.primary}} {...props} />),
     h3: ({ ...props }) => (<h3 style={{color:themeColors.primary_dark}} className=" font-bold text-3xl" {...props} />),
     h4: ({ ...props }) => (<h4 style={{color:themeColors.primary_muted}} className="px-8 font-bold text-3xl" {...props} />),
-    li: ({ ...props }) => (<li className="text-lg ml-16 my-4 text-slate-600 list-decimal" {...props} />),
+    li: ({ ...props }) => (<li style={{color:themeColors.primary}} className="text-lg ml-10 my-4  list-decimal" {...props} />),
     // a: ({ ...props }) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props} />),
     a: ({ ...props }) => {
       if (props.href.startsWith('#')) {
@@ -39,7 +39,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
       }
       
     },
-    pre: ({ ...props }) => (<pre {...props} className={`mb-6 mx-4 w-[96%] overflow-x-auto block  bg-slate-800  p-3 rounded-md`} style={{color:themeColors.primary_muted}}/>),
+    pre: ({ ...props }) => (<pre {...props} className={`my-6 mx-4 w-[96%] overflow-x-auto block  bg-slate-800  p-3 rounded-md`} style={{color:themeColors.primary_muted}}/>),
     code: ({ ...props }) => (<code {...props} className={` text-base`} />)
   }
 
@@ -95,10 +95,10 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
 
               <hr className={styles.hr} />
 
-              <div className="bg-grayDark w-full text-center p-6">
-                <div className="text-[1.75rem] font-bold text-white">
+              <div className="bg-grayDark w-full text-center p-6 px-60">
+                <h1 className="text-[2rem] font-bold text-white">
                 {post.title}
-                </div>
+                </h1>
                 
               </div>
 
@@ -125,6 +125,7 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                 {articleSections.map((section, index) => (
                   <div key={`section-${section.section_title}`} id={section.section_slug}>
                     <div className={styles.header} style={{ color: themeColors.primary }}>{section.section_title}</div>
+                    
                     <div>
                       <Markdown className="max-w-[924px] bg-transparent overflow-hidden" components={articleBodyMarkdown}>{section.section_body}</Markdown>
                     </div>
