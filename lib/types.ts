@@ -67,3 +67,17 @@ export interface Theme{
     secondary: string;  
   }
 }
+
+export type OverlayInfo = {
+  section_title: string;
+  section_body: string;
+  section_slug: string;
+  img?: ImageInfo; // Optional image property
+};
+
+type ImageInfo = {
+  width: number;
+  height: number;
+  src: string;
+  alt: string;
+};

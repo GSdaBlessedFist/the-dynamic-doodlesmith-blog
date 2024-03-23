@@ -21,6 +21,7 @@ export default async ({ params }: { params: { slug: string } }) => {
   const suggestedPosts = await getRelatedPosts({ params });
 
   
+    
   return (
     <>
       <Post post={post} suggestedPosts={suggestedPosts}/>

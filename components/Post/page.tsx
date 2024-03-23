@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { PostType } from "../../lib/types";
+import { PostType,OverlayInfo } from "../../lib/types";
 import ArrowRight from "../icons/ArrowRight";
 import ArrowLeft from "../icons/ArrowLeft";
 import AuthorAvatar from "../AuthorAvatar/page";
@@ -11,47 +11,71 @@ import Tag from "../Tag/page";
 import { sanitize } from "isomorphic-dompurify";
 import SuggestedPostCard from "../SuggestedPostCard";
 import { hexToRGBA } from "../../utils/addOpacityToColorUtility";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Markdown from 'react-markdown'
+import overlayConfigurations from "../Overlays/overlays";
+import Overlay from "../Overlays/page";
+
 
 const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostType[] }) => {
   const themeColors = post.metadata.theme.metadata;
   const boxShadowColor = hexToRGBA(themeColors.primary, 0.4);
   const articleSections = post.metadata.article_sections.sections;
-  const [explainationsHidden, setExplainationsHidden] = useState(false);
-  const [displayOptionMessage, setDisplayOptionMessage] = useState("Instructions Only");
+  const [filteredSections, setFilteredSections] = useState([]);
 
-  
+
+
+  const regexPattern = /Introduction/;
+  // imageSources = the targeted markdown 
+  // those get passed to the OVerlay where cooridinates will be obtained
+
+
 
   const articleBodyMarkdown = {
     p: ({ ...props }) => (<p className="w-full px-6 py-3 text-slate-600 text-xl tracking-wide my-4 " {...props} />),
-    strong: ({ ...props }) => (<strong style={{color:themeColors.primary_dark}} {...props} />),
-    h2: ({ ...props }) => (<h2 style={{color:themeColors.primary}} {...props} />),
-    h3: ({ ...props }) => (<h3 style={{color:themeColors.primary_dark}} className=" font-bold text-3xl" {...props} />),
-    h4: ({ ...props }) => (<h4 style={{color:themeColors.primary_muted}} className="px-8 font-bold text-3xl" {...props} />),
-    li: ({ ...props }) => (<li style={{color:themeColors.primary}} className="text-lg ml-10 my-4  list-decimal" {...props} />),
+    strong: ({ ...props }) => (<strong style={{ color: themeColors.primary_dark }} {...props} />),
+    h2: ({ ...props }) => (<h2 style={{ color: themeColors.primary }} {...props} />),
+    h3: ({ ...props }) => (<h3 style={{ color: themeColors.primary_dark }} className=" font-bold text-3xl" {...props} />),
+    h4: ({ ...props }) => (<h4 style={{ color: themeColors.primary_muted }} className="px-8 font-bold text-3xl" {...props} />),
+    li: ({ ...props }) => (<li style={{ color: themeColors.primary }} className="text-lg ml-10 my-4  list-decimal" {...props} />),
     // a: ({ ...props }) => (<Link href={props.href} className="text-md text-[#428A7F] tracking-normal font-bold" {...props} />),
     a: ({ ...props }) => {
       if (props.href.startsWith('#')) {
-        return (<Link href={props.href} className="tracking-normal font-bold" style={{color:themeColors.primary}} {...props}></Link>)
-      }else{
-        return (<Link href={props.href} className="tracking-normal font-bold" style={{color:themeColors.primary}} {...props} target="_blank" rel="noopener noreferrer"></Link>)
+        return (<Link href={props.href} className="tracking-normal font-bold" style={{ color: themeColors.primary }} {...props}></Link>)
+      } else {
+        return (<Link href={props.href} className="tracking-normal font-bold" style={{ color: themeColors.primary }} {...props} target="_blank" rel="noopener noreferrer"></Link>)
       }
-      
+
     },
-    pre: ({ ...props }) => (<pre {...props} className={`my-6 mx-4 w-[96%] overflow-x-auto block  bg-slate-800  p-3 rounded-md`} style={{color:themeColors.primary_muted}}/>),
+    pre: ({ ...props }) => (<pre {...props} className={`my-6 mx-4 w-[96%] overflow-x-auto block  bg-slate-800  p-3 rounded-md`} style={{ color: themeColors.primary_muted }} />),
     code: ({ ...props }) => (<code {...props} className={` text-base`} />)
   }
 
-  
 
   useEffect(() => {
     document.documentElement.style.setProperty('--color-layout-primaryDark', 'hsla(230, 41%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary', 'hsla(230, 30%, 15%, 100%)');
     document.documentElement.style.setProperty('--color-layout-primary-muted', 'hsla(234, 20%, 48%,100%)');
     document.documentElement.style.setProperty('--tagsRow-view', "none");
-    console.log(articleSections)
+
   }, [])
+  const overlayInfo:OverlayInfo[] = [];
+  useEffect(() => {
+
+    const config = overlayConfigurations(post.slug, articleSections)
+    config.forEach((section:any, index:number) => {
+      const element = document.getElementById(config[index].section_slug) || null
+      if(element) element.style.border = "10px blue solid" ;
+      console.log("config")
+      console.log(config)
+      overlayInfo.push(
+        {
+          ...section,
+          dimensions: element?.getBoundingClientRect()
+        })
+    });
+    //console.log("%cOverlayInfo: %o", "color:steelblue;font-size:1.5rem", overlayInfo)
+  }, [post]);
 
 
 
@@ -93,13 +117,12 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
                 </div>
               </div>
 
-              <hr className={styles.hr} />
 
               <div className="bg-grayDark w-full text-center p-6 px-60">
                 <h1 className="text-[2rem] font-bold text-white">
-                {post.title}
+                  {post.title}
                 </h1>
-                
+
               </div>
 
 
@@ -117,29 +140,30 @@ const Post = ({ post, suggestedPosts }: { post: PostType; suggestedPosts: PostTy
               {/* ******************************************************* */}
 
 
-
-
               <article className={styles.articleSection}>
                 <div className={styles.underlay}></div>
-                  
+
                 {articleSections.map((section, index) => (
                   <div key={`section-${section.section_title}`} id={section.section_slug}>
                     <div className={styles.header} style={{ color: themeColors.primary }}>{section.section_title}</div>
-                    
+
                     <div>
-                      <Markdown className="max-w-[924px] bg-transparent overflow-hidden" components={articleBodyMarkdown}>{section.section_body}</Markdown>
+                      <Markdown className="w-[900px]  bg-transparent overflow-hidden" components={articleBodyMarkdown}>{section.section_body}</Markdown>
                     </div>
 
                   </div>
                 ))}
-                {/* <div className={styles.pageBackArrow}>
-                  <Link href="/" className="rounded-full border border-zinc-100 bg-white p-6  opacity-25 text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
-                    <ArrowLeft className="h-16 w-16 " />
-                  </Link>
-                </div> */}
-                
-              </article>
 
+
+
+                {/* <div className={styles.pageBackArrow}>
+                    <Link href="/" className="rounded-full border border-zinc-100 bg-white p-6  opacity-25 text-zinc-700 shadow-md dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300" >
+                    <ArrowLeft className="h-16 w-16 " />
+                    </Link>
+                  </div> */}
+
+                <Overlay overlayInfo={overlayInfo} />
+              </article>
             </>
           )}
 

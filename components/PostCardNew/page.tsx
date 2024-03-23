@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import ArrowRight from '../icons/ArrowRight';
@@ -15,7 +15,9 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
   const authorSectionAlignmentClass = alignment === "left" ? styles.authorSectionRight : styles.authorSectionLeft;
   const articleInfoAlignmentClass = alignment === "left" ? styles.articleInfoAlignmentLeft : styles.articleInfoAlignmentRight;
   const teaserAlignmentClass = alignment === "left" ? styles.teaserSectionLeft : styles.teaserSectionRight;
-  return (<>
+
+
+    return (<>
 
     <div className={styles.postCard}>
       <div className={styles.heroSection}>
@@ -62,7 +64,7 @@ export default function PostCardNew({ post, alignment }: { post: PostType; align
 
             <div className={styles.tags}>
               {post.metadata.categories && post.metadata.categories.map((category:Category ) => (
-                <Tag key={category.slug} themeColors={{ primary:"",primary_muted: "#626792" }}>{category.title} </Tag>
+                <Tag key={category.slug} themeColors={{ primary:"#24368F",primary_muted: "#626792",primary_dark:"#152055" }}>{category.title} </Tag>
               ))}
             </div>
           </div>

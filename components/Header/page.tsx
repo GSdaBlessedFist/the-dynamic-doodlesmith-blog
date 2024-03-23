@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from 'next/image';
 import { GlobalData } from '../../lib/types';
 import styles from "./styles.module.scss"
-import  "../../styles/globals.css";
+import  "../../styles/globals.scss";
 import logo from "../../public/images/dynamicDoodlesmithLogo.png";
 import TagsRow from '../TagsRow/page';
 

@@ -4,14 +4,14 @@ import Loader from "../components/Loader/page";
 import PostCardNew from '../components/PostCardNew/page';
 import { PostType } from "../lib/types";
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+//import { useSearchParams } from 'next/navigation';
 
 
 
 // export default async function Page(): Promise<JSX.Element> {
-export default  function Page(): Promise<JSX.Element> {
-  const [posts, setPosts] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+export default  function Page(){
+  const [posts, setPosts] = useState<PostType[]>([]);
+  //const [searchParams, setSearchParams] = useSearchParams();
   const [loaderPlayed,setLoaderPlayed] = useState("false");
 
 
@@ -41,7 +41,9 @@ export default  function Page(): Promise<JSX.Element> {
   }, []);
 
 
-
+  useEffect(() => {
+    console.log(posts);
+  },[posts]);
 
 
   return (<>

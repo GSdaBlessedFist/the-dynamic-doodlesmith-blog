@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import { getGlobalData } from '../lib/cosmic';
 import Generator from 'next/font/local';
 import Banner from '../components/Banner';
